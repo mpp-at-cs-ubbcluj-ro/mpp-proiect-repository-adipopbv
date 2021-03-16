@@ -44,4 +44,11 @@ public interface Repository<ID, E extends Entity<ID>> {
      * @throws NotFoundException if the old entity is not found in the repo
      */
     E modify(ID id, E newEntity) throws DuplicateException, NotFoundException;
+
+    /**
+     * Gets the repo as a string
+     * @return a string with the entities of the repo
+     */
+    @Override
+    String toString();
 }

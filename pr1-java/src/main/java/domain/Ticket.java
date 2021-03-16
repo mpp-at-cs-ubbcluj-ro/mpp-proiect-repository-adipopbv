@@ -20,8 +20,18 @@ public class Ticket extends Entity<Integer>{
         this.cost = cost;
     }
 
-    public Ticket(Game game, Integer cost) {
+    public Ticket(Integer id, Game game, Integer cost) {
+        super(id);
         this.game = game;
         this.cost = cost;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id='" + getId() + '\'' +
+                ", game=" + game.getName() +
+                ", cost=" + cost +
+                '}';
     }
 }
