@@ -1,7 +1,6 @@
 package repository.database;
 
 import domain.Game;
-import domain.User;
 import domain.exceptions.DuplicateException;
 import domain.exceptions.NotFoundException;
 import org.apache.logging.log4j.LogManager;
@@ -34,19 +33,18 @@ public class GameDbRepository implements GameRepository {
         try (PreparedStatement preparedStatement = connection.prepareStatement("select * from games;")) {
             try (ResultSet result = preparedStatement.executeQuery()) {
                 while (result.next()) {
-                    Integer id = result.getInt("id");
+                    Integer gameId = result.getInt("gameId");
                     String name = result.getString("name");
                     String homeTeam = result.getString("homeTeam");
                     String awayTeam = result.getString("awayTeam");
                     Integer availableSeats = result.getInt("availableSeats");
 
-                    Game game = new Game(id, name, homeTeam, awayTeam, availableSeats);
+                    Game game = new Game(gameId, name, homeTeam, awayTeam, availableSeats);
                     games.add(game);
                 }
             }
-        } catch (SQLException ex) {
-            logger.error(ex);
-            System.err.println("Error Database " + ex);
+        } catch (SQLException exception) {
+            logger.error(exception);
         }
 
         logger.traceExit(games);
@@ -54,25 +52,25 @@ public class GameDbRepository implements GameRepository {
     }
 
     @Override
-    public Game getOne(Integer id) {
+    public Game getOne(Integer id) throws NotFoundException {
         logger.traceEntry();
 
         Connection connection = dbUtils.getConnection();
         Game game = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement("select * from games where id = " + id + ";")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("select * from games where gameId = " + id + ";")) {
             try (ResultSet result = preparedStatement.executeQuery()) {
-                while (result.next()) {
-                    String name = result.getString("name");
-                    String homeTeam = result.getString("homeTeam");
-                    String awayTeam = result.getString("awayTeam");
-                    Integer availableSeats = result.getInt("availableSeats");
+                String name = result.getString("name");
+                String homeTeam = result.getString("homeTeam");
+                String awayTeam = result.getString("awayTeam");
+                Integer availableSeats = result.getInt("availableSeats");
 
-                    game = new Game(id, name, homeTeam, awayTeam, availableSeats);
-                }
+                game = new Game(id, name, homeTeam, awayTeam, availableSeats);
+            } catch (SQLException exception) {
+                logger.error(exception);
+                throw new NotFoundException();
             }
-        } catch (SQLException ex) {
-            logger.error(ex);
-            System.err.println("Error Database " + ex);
+        } catch (SQLException exception) {
+            logger.error(exception);
         }
 
         logger.traceExit(game);
@@ -83,8 +81,14 @@ public class GameDbRepository implements GameRepository {
     public Game add(Game game) throws DuplicateException {
         logger.traceEntry("Saving game {} ", game);
 
+        try {
+            getOne(game.getId());
+            throw new DuplicateException();
+        } catch (NotFoundException ignored) {
+        }
+
         Connection connection = dbUtils.getConnection();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("insert into games(id, name, homeTeam, awayTeam, availableSeats) " + "values(?,?,?,?,?);")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("insert into games(gameId, name, homeTeam, awayTeam, availableSeats) " + "values(?,?,?,?,?);")) {
             preparedStatement.setInt(1, game.getId());
             preparedStatement.setString(2, game.getName());
             preparedStatement.setString(3, game.getHomeTeam());
@@ -93,9 +97,8 @@ public class GameDbRepository implements GameRepository {
 
             int result = preparedStatement.executeUpdate();
             logger.trace("Saved {} instances", result);
-        } catch (SQLException ex) {
-            logger.error(ex);
-            System.err.println("Error Database " + ex);
+        } catch (SQLException exception) {
+            logger.error(exception);
         }
 
         logger.traceExit(game);
@@ -104,12 +107,43 @@ public class GameDbRepository implements GameRepository {
 
     @Override
     public Game remove(Integer id) throws NotFoundException {
-        return null;
+        logger.traceEntry("Removing game with id {} ", id);
+
+        Game game = getOne(id);
+        Connection connection = dbUtils.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement("delete from games where gameId = " + id + ";")) {
+            int result = preparedStatement.executeUpdate();
+            logger.trace("Deleted {} instances", result);
+        } catch (SQLException exception) {
+            logger.error(exception);
+            throw new NotFoundException();
+        }
+
+        logger.traceExit(game);
+        return game;
     }
 
     @Override
-    public Game modify(Integer id, Game newGame) throws DuplicateException, NotFoundException {
-        return null;
+    public Game modify(Integer id, Game newGame) throws NotFoundException {
+        logger.traceEntry("Modifying game with id {} ", id);
+
+        Game oldGame = getOne(id);
+        Connection connection = dbUtils.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement("update games set " +
+                "name = '" + newGame.getName() +
+                "', homeTeam = '" + newGame.getHomeTeam() +
+                "', awayTeam = '" + newGame.getAwayTeam() +
+                "', availableSeats = '" + newGame.getAvailableSeats() +
+                "' where gameId = " + id + ";")) {
+            int result = preparedStatement.executeUpdate();
+            logger.trace("Modified {} instances", result);
+        } catch (SQLException exception) {
+            logger.error(exception);
+        }
+
+        logger.traceExit(oldGame);
+        return oldGame;
+
     }
 
     @Override

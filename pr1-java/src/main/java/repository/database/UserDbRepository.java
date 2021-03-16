@@ -33,17 +33,16 @@ public class UserDbRepository implements UserRepository {
         try (PreparedStatement preparedStatement = connection.prepareStatement("select * from users;")) {
             try (ResultSet result = preparedStatement.executeQuery()) {
                 while (result.next()) {
-                    Integer id = result.getInt("id");
+                    Integer userId = result.getInt("userId");
                     String username = result.getString("username");
                     String status = result.getString("status");
 
-                    User user = new User(id, username, status);
+                    User user = new User(userId, username, status);
                     users.add(user);
                 }
             }
-        } catch (SQLException ex) {
-            logger.error(ex);
-            System.err.println("Error Database " + ex);
+        } catch (SQLException exception) {
+            logger.error(exception);
         }
 
         logger.traceExit(users);
@@ -51,23 +50,23 @@ public class UserDbRepository implements UserRepository {
     }
 
     @Override
-    public User getOne(Integer id) {
+    public User getOne(Integer id) throws NotFoundException {
         logger.traceEntry();
 
         Connection connection = dbUtils.getConnection();
         User user = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement("select * from users where id = " + id + ";")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("select * from users where userId = " + id + ";")) {
             try (ResultSet result = preparedStatement.executeQuery()) {
-                while (result.next()) {
-                    String username = result.getString("username");
-                    String status = result.getString("status");
+                String username = result.getString("username");
+                String status = result.getString("status");
 
-                    user = new User(id, username, status);
-                }
+                user = new User(id, username, status);
+            } catch (SQLException exception) {
+                logger.error(exception);
+                throw new NotFoundException();
             }
-        } catch (SQLException ex) {
-            logger.error(ex);
-            System.err.println("Error Database " + ex);
+        } catch (SQLException exception) {
+            logger.error(exception);
         }
 
         logger.traceExit(user);
@@ -78,17 +77,22 @@ public class UserDbRepository implements UserRepository {
     public User add(User user) throws DuplicateException {
         logger.traceEntry("Saving user {} ", user);
 
+        try {
+            getOne(user.getId());
+            throw new DuplicateException();
+        } catch (NotFoundException ignored) {
+        }
+
         Connection connection = dbUtils.getConnection();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("insert into users(id, username, status) " + "values(?,?,?);")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("insert into users(userId, username, status) " + "values(?,?,?);")) {
             preparedStatement.setInt(1, user.getId());
             preparedStatement.setString(2, user.getUsername());
             preparedStatement.setString(3, user.getStatus());
 
             int result = preparedStatement.executeUpdate();
             logger.trace("Saved {} instances", result);
-        } catch (SQLException ex) {
-            logger.error(ex);
-            System.err.println("Error Database " + ex);
+        } catch (SQLException exception) {
+            logger.error(exception);
         }
 
         logger.traceExit(user);
@@ -97,12 +101,40 @@ public class UserDbRepository implements UserRepository {
 
     @Override
     public User remove(Integer id) throws NotFoundException {
-        return null;
+        logger.traceEntry("Removing user with id {} ", id);
+
+        User user = getOne(id);
+        Connection connection = dbUtils.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement("delete from users where userId = " + id + ";")) {
+            int result = preparedStatement.executeUpdate();
+            logger.trace("Deleted {} instances", result);
+        } catch (SQLException exception) {
+            logger.error(exception);
+            throw new NotFoundException();
+        }
+
+        logger.traceExit(user);
+        return user;
     }
 
     @Override
-    public User modify(Integer id, User newUser) throws DuplicateException, NotFoundException {
-        return null;
+    public User modify(Integer id, User newUser) throws NotFoundException {
+        logger.traceEntry("Modifying user with id {} ", id);
+
+        User oldUser = getOne(id);
+        Connection connection = dbUtils.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement("update users set " +
+                "username = '" + newUser.getUsername() +
+                "', status = '" + newUser.getStatus() +
+                "' where userId = " + id + ";")) {
+            int result = preparedStatement.executeUpdate();
+            logger.trace("Modified {} instances", result);
+        } catch (SQLException exception) {
+            logger.error(exception);
+        }
+
+        logger.traceExit(oldUser);
+        return oldUser;
     }
 
     @Override

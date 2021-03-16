@@ -30,5 +30,17 @@ public class Main {
         System.out.println("All users: " + userRepository);
         System.out.println("All games: " + gameRepository);
         System.out.println("All tickets: " + ticketRepository);
+        userRepository.modify(1, new User(1, "adipopbv", "logged-in"));
+        gameRepository.modify(1, new Game(1, "Finals", "Celtics", "Rockets", 450));
+        ticketRepository.modify(1, new Ticket(1, gameRepository.getOne(1), 200));
+        System.out.println("All users: " + userRepository);
+        System.out.println("All games: " + gameRepository);
+        System.out.println("All tickets: " + ticketRepository);
+        userRepository.remove(1);
+        gameRepository.remove(1);
+//        ticketRepository.remove(1);
+        System.out.println("All users: " + userRepository);
+        System.out.println("All games: " + gameRepository);
+        System.out.println("All tickets: " + ticketRepository);
     }
 }

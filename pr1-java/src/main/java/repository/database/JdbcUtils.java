@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -25,6 +26,7 @@ public class JdbcUtils {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(url);
+            connection.prepareStatement("pragma foreign_keys = on;").executeUpdate();
             logger.info("Connected successfully to {}", url);
         } catch (SQLException exception) {
             logger.error(exception);

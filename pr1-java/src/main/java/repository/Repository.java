@@ -16,8 +16,9 @@ public interface Repository<ID, E extends Entity<ID>> {
      * Gets an entity
      * @param id the id of the searched entity
      * @return the searched entity
+     * @throws NotFoundException if entity not found in repo
      */
-    E getOne(ID id);
+    E getOne(ID id) throws NotFoundException;
 
     /**
      * Adds an entity to the repo
@@ -40,10 +41,9 @@ public interface Repository<ID, E extends Entity<ID>> {
      * @param id the id of the entity to be modified
      * @param newEntity the new entity that replaces the old one
      * @return the old entity
-     * @throws DuplicateException if the new entity is already in the repo
      * @throws NotFoundException if the old entity is not found in the repo
      */
-    E modify(ID id, E newEntity) throws DuplicateException, NotFoundException;
+    E modify(ID id, E newEntity) throws NotFoundException;
 
     /**
      * Gets the repo as a string
