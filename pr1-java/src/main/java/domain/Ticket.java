@@ -1,37 +1,37 @@
 package domain;
 
 public class Ticket extends Entity<Integer>{
-    private Game game;
-    private Integer cost;
+    private Game forGame;
+    private String clientName;
 
-    public Game getGame() {
-        return game;
+    public Game getForGame() {
+        return forGame;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setForGame(Game forGame) {
+        this.forGame = forGame;
     }
 
-    public Integer getCost() {
-        return cost;
+    public String getClientName() {
+        return clientName;
     }
 
-    public void setCost(Integer cost) {
-        this.cost = cost;
+    public void setClientName(String cost) {
+        this.clientName = cost;
     }
 
-    public Ticket(Integer id, Game game, Integer cost) {
+    public Ticket(Integer id, Game forGame, String clientName) {
         super(id);
-        this.game = game;
-        this.cost = cost;
+        this.forGame = forGame;
+        this.clientName = clientName;
     }
 
     @Override
     public String toString() {
         return "Ticket{" +
                 "id='" + getId() + '\'' +
-                ", game=" + game.getName() +
-                ", cost=" + cost +
+                ", forGame=" + forGame.getName() +
+                ", clientName=" + clientName +
                 '}';
     }
 }

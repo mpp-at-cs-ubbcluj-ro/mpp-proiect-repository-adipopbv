@@ -5,6 +5,7 @@ public class Game extends Entity<Integer>{
     private String homeTeam;
     private String awayTeam;
     private Integer availableSeats;
+    private Integer seatCost;
 
     public String getName() {
         return name;
@@ -38,12 +39,21 @@ public class Game extends Entity<Integer>{
         this.availableSeats = availableSeats;
     }
 
-    public Game(Integer id, String name, String homeTeam, String awayTeam, Integer availableSeats) {
+    public Integer getSeatCost() {
+        return seatCost;
+    }
+
+    public void setSeatCost(Integer seatCost) {
+        this.seatCost = seatCost;
+    }
+
+    public Game(Integer id, String name, String homeTeam, String awayTeam, Integer availableSeats, Integer seatCost) {
         super(id);
         this.name = name;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.availableSeats = availableSeats;
+        this.seatCost = seatCost;
     }
 
     @Override
@@ -53,7 +63,8 @@ public class Game extends Entity<Integer>{
                 ", name='" + name + '\'' +
                 ", homeTeam='" + homeTeam + '\'' +
                 ", awayTeam='" + awayTeam + '\'' +
-                ", availableSeats=" + availableSeats +
+                ", availableSeats=" + availableSeats + '\'' +
+                ", seatCost=" + seatCost +
                 '}';
     }
 }

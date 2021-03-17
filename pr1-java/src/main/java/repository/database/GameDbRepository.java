@@ -38,8 +38,9 @@ public class GameDbRepository implements GameRepository {
                     String homeTeam = result.getString("homeTeam");
                     String awayTeam = result.getString("awayTeam");
                     Integer availableSeats = result.getInt("availableSeats");
+                    Integer seatCost = result.getInt("seatCost");
 
-                    Game game = new Game(gameId, name, homeTeam, awayTeam, availableSeats);
+                    Game game = new Game(gameId, name, homeTeam, awayTeam, availableSeats, seatCost);
                     games.add(game);
                 }
             }
@@ -63,8 +64,9 @@ public class GameDbRepository implements GameRepository {
                 String homeTeam = result.getString("homeTeam");
                 String awayTeam = result.getString("awayTeam");
                 Integer availableSeats = result.getInt("availableSeats");
+                Integer seatCost = result.getInt("seatCost");
 
-                game = new Game(id, name, homeTeam, awayTeam, availableSeats);
+                game = new Game(id, name, homeTeam, awayTeam, availableSeats, seatCost);
             } catch (SQLException exception) {
                 logger.error(exception);
                 throw new NotFoundException();
@@ -88,12 +90,13 @@ public class GameDbRepository implements GameRepository {
         }
 
         Connection connection = dbUtils.getConnection();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("insert into games(gameId, name, homeTeam, awayTeam, availableSeats) " + "values(?,?,?,?,?);")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("insert into games(gameId, name, homeTeam, awayTeam, availableSeats, seatCost) " + "values(?,?,?,?,?,?);")) {
             preparedStatement.setInt(1, game.getId());
             preparedStatement.setString(2, game.getName());
             preparedStatement.setString(3, game.getHomeTeam());
             preparedStatement.setString(4, game.getAwayTeam());
             preparedStatement.setInt(5, game.getAvailableSeats());
+            preparedStatement.setInt(6, game.getSeatCost());
 
             int result = preparedStatement.executeUpdate();
             logger.trace("Saved {} instances", result);
@@ -133,8 +136,9 @@ public class GameDbRepository implements GameRepository {
                 "name = '" + newGame.getName() +
                 "', homeTeam = '" + newGame.getHomeTeam() +
                 "', awayTeam = '" + newGame.getAwayTeam() +
-                "', availableSeats = '" + newGame.getAvailableSeats() +
-                "' where gameId = " + id + ";")) {
+                "', availableSeats = " + newGame.getAvailableSeats() +
+                ", seatCost = " + newGame.getSeatCost() +
+                " where gameId = " + id + ";")) {
             int result = preparedStatement.executeUpdate();
             logger.trace("Modified {} instances", result);
         } catch (SQLException exception) {

@@ -6,7 +6,6 @@ import domain.exceptions.DuplicateException;
 import domain.exceptions.NotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import repository.GameRepository;
 import repository.TicketRepository;
 
 import java.sql.Connection;
@@ -20,12 +19,10 @@ import java.util.Properties;
 public class TicketDbRepository implements TicketRepository {
     private final JdbcUtils dbUtils;
     private static final Logger logger = LogManager.getLogger();
-    private final GameRepository gameRepository;
 
-    public TicketDbRepository(Properties properties, GameRepository gameRepository) {
+    public TicketDbRepository(Properties properties) {
         logger.info("Initializing TicketDbRepository with properties: {} ", properties);
         dbUtils = new JdbcUtils(properties);
-        this.gameRepository = gameRepository;
     }
 
     @Override
@@ -38,9 +35,9 @@ public class TicketDbRepository implements TicketRepository {
             try (ResultSet result = preparedStatement.executeQuery()) {
                 while (result.next()) {
                     Integer id = result.getInt("ticketId");
-                    Integer cost = result.getInt("cost");
+                    String clientName = result.getString("clientName");
 
-                    Ticket ticket = new Ticket(id, getGameFromResultSet(result), cost);
+                    Ticket ticket = new Ticket(id, getGameFromResultSet(result), clientName);
                     tickets.add(ticket);
                 }
             } catch (NotFoundException exception) {
@@ -62,9 +59,9 @@ public class TicketDbRepository implements TicketRepository {
         Ticket ticket = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement("select * from tickets inner join games on games.gameId = tickets.forGameId where ticketId = " + id + ";")) {
             try (ResultSet result = preparedStatement.executeQuery()) {
-                Integer cost = result.getInt("cost");
+                String clientName = result.getString("clientName");
 
-                ticket = new Ticket(id, getGameFromResultSet(result), cost);
+                ticket = new Ticket(id, getGameFromResultSet(result), clientName);
             } catch (SQLException exception) {
                 logger.error(exception);
                 throw new NotFoundException();
@@ -88,10 +85,10 @@ public class TicketDbRepository implements TicketRepository {
         }
 
         Connection connection = dbUtils.getConnection();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("insert into tickets(ticketId, forGameId, cost) " + "values(?,?,?);")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("insert into tickets(ticketId, forGameId, clientName) " + "values(?,?,?);")) {
             preparedStatement.setInt(1, ticket.getId());
-            preparedStatement.setInt(2, ticket.getGame().getId());
-            preparedStatement.setInt(3, ticket.getCost());
+            preparedStatement.setInt(2, ticket.getForGame().getId());
+            preparedStatement.setString(3, ticket.getClientName());
 
             int result = preparedStatement.executeUpdate();
             logger.trace("Saved {} instances", result);
@@ -128,9 +125,9 @@ public class TicketDbRepository implements TicketRepository {
         Ticket oldTicket = getOne(id);
         Connection connection = dbUtils.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement("update tickets set " +
-                "forGameId = " + newTicket.getGame().getId() +
-                ", cost = " + newTicket.getCost() +
-                " where ticketId = " + id + ";")) {
+                "forGameId = " + newTicket.getForGame().getId() +
+                ", clientName = '" + newTicket.getClientName() +
+                "' where ticketId = " + id + ";")) {
             int result = preparedStatement.executeUpdate();
             logger.trace("Modified {} instances", result);
         } catch (SQLException exception) {
@@ -148,7 +145,8 @@ public class TicketDbRepository implements TicketRepository {
             String homeTeam = result.getString("homeTeam");
             String awayTeam = result.getString("awayTeam");
             Integer availableSeats = result.getInt("availableSeats");
-            return new Game(gameId, name, homeTeam, awayTeam, availableSeats);
+            Integer seatCost = result.getInt("seatCost");
+            return new Game(gameId, name, homeTeam, awayTeam, availableSeats, seatCost);
         } catch (SQLException exception) {
             logger.error(exception);
             throw new NotFoundException();
