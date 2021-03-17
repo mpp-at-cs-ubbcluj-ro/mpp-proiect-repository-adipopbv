@@ -151,6 +151,34 @@ public class GameDbRepository implements GameRepository {
     }
 
     @Override
+    public Iterable<Game> getGamesOrderedByAvailableSeats(Boolean reverse) {
+        logger.traceEntry();
+
+        Connection connection = dbUtils.getConnection();
+        List<Game> games = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement("select * from games order by availableSeats desc;")) {
+            try (ResultSet result = preparedStatement.executeQuery()) {
+                while (result.next()) {
+                    Integer gameId = result.getInt("gameId");
+                    String name = result.getString("name");
+                    String homeTeam = result.getString("homeTeam");
+                    String awayTeam = result.getString("awayTeam");
+                    Integer availableSeats = result.getInt("availableSeats");
+                    Integer seatCost = result.getInt("seatCost");
+
+                    Game game = new Game(gameId, name, homeTeam, awayTeam, availableSeats, seatCost);
+                    games.add(game);
+                }
+            }
+        } catch (SQLException exception) {
+            logger.error(exception);
+        }
+
+        logger.traceExit(games);
+        return games;
+    }
+
+    @Override
     public String toString() {
         StringBuilder string = new StringBuilder();
         for (Game game : getAll())
