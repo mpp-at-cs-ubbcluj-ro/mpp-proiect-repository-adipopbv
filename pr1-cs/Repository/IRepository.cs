@@ -7,7 +7,7 @@ namespace pr1_cs.Repository
     {
         IEnumerable<TEntity> GetAll();
 
-        TEntity GetOne();
+        TEntity GetOne(TId id);
 
         TEntity Add(TEntity entity);
         

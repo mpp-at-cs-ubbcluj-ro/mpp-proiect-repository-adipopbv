@@ -156,7 +156,9 @@ public class GameDbRepository implements GameRepository {
 
         Connection connection = dbUtils.getConnection();
         List<Game> games = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("select * from games order by availableSeats desc;")) {
+        String statement = "select * from games order by availableSeats";
+        statement += reverse ? " desc;" : ";";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
             try (ResultSet result = preparedStatement.executeQuery()) {
                 while (result.next()) {
                     Integer gameId = result.getInt("gameId");

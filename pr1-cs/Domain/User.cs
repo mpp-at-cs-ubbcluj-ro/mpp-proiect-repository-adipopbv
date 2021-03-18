@@ -22,5 +22,14 @@ namespace pr1_cs.Domain
             _username = username;
             _status = status;
         }
+
+        public override string ToString()
+        {
+		    return "User{" +
+                "id='" + Id+ '\'' +
+                ", username='" + Username + '\'' +
+                ", status='" + Status + '\'' +
+                '}';
+        }
     }
 }

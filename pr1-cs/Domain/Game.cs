@@ -6,6 +6,7 @@ namespace pr1_cs.Domain
         private string _homeTeam;
         private string _awayTeam;
         private int _availableSeats;
+        private int _seatCost;
 
         public string Name
         {
@@ -31,12 +32,31 @@ namespace pr1_cs.Domain
             set => _availableSeats = value;
         }
 
-        public Game(int id, string name, string homeTeam, string awayTeam, int availableSeats) : base(id)
+        public int SeatCost
+        {
+            get => _seatCost;
+            set => _seatCost = value;
+        }
+
+        public Game(int id, string name, string homeTeam, string awayTeam, int availableSeats, int seatCost) : base(id)
         {
             _name = name;
             _homeTeam = homeTeam;
             _awayTeam = awayTeam;
             _availableSeats = availableSeats;
+            _seatCost = seatCost;
+        }
+
+        public override string ToString()
+        {
+		    return "Game{" +
+                "id='" + Id+ '\'' +
+                ", name='" + Name + '\'' +
+                ", homeTeam='" + HomeTeam + '\'' +
+                ", awayTeam='" + AwayTeam + '\'' +
+                ", availableSeats='" + AvailableSeats + '\'' +
+                ", seatCost='" + SeatCost + '\'' +
+                '}';
         }
     }
 }

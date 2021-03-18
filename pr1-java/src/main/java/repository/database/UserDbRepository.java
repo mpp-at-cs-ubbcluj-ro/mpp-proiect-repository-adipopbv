@@ -84,7 +84,7 @@ public class UserDbRepository implements UserRepository {
         }
 
         Connection connection = dbUtils.getConnection();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("insert into users(userId, username, status) " + "values(?,?,?);")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("insert into users(userId, username, status) values(?,?,?);")) {
             preparedStatement.setInt(1, user.getId());
             preparedStatement.setString(2, user.getUsername());
             preparedStatement.setString(3, user.getStatus());

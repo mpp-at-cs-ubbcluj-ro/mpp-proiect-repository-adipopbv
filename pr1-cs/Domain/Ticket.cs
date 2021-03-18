@@ -2,25 +2,34 @@ namespace pr1_cs.Domain
 {
     public class Ticket : Entity<int>
     {
-        private Game _game;
-        private int _cost;
+        private Game _forGame;
+        private string _clientName;
 
-        public Game Game
+        public Game ForGame
         {
-            get => _game;
-            set => _game = value;
+            get => _forGame;
+            set => _forGame = value;
         }
 
-        public int Cost
+        public string ClientName
         {
-            get => _cost;
-            set => _cost = value;
+            get => _clientName;
+            set => _clientName = value;
         }
 
-        public Ticket(int id, Game game, int cost) : base(id)
+        public Ticket(int id, Game forGame, string clientName) : base(id)
         {
-            _game = game;
-            _cost = cost;
+            _forGame = forGame;
+            _clientName = clientName;
+        }
+
+        public override string ToString()
+        {
+		    return "Ticket{" +
+                "id='" + Id+ '\'' +
+                ", forGame='" + ForGame.Name + '\'' +
+                ", clientName='" + ClientName + '\'' +
+                '}';
         }
     }
 }

@@ -6,25 +6,25 @@ domain/exceptions/DuplicateException.java
  domain.exceptions.DuplicateException
 domain/Entity.java
  domain.Entity
-repository/GameRepository.java
- repository.GameRepository
+repository/database/TicketDbRepository.java
+ repository.database.TicketDbRepository
 domain/exceptions/NotFoundException.java
  domain.exceptions.NotFoundException
 domain/User.java
  domain.User
 repository/database/JdbcUtils.java
  repository.database.JdbcUtils
-Main.java
- Main
-domain/Game.java
- domain.Game
-repository/database/GameDbRepository.java
- repository.database.GameDbRepository
-repository/TicketRepository.java
- repository.TicketRepository
-repository/database/UserDbRepository.java
- repository.database.UserDbRepository
 domain/Ticket.java
  domain.Ticket
-repository/database/TicketDbRepository.java
- repository.database.TicketDbRepository
+domain/Game.java
+ domain.Game
+repository/TicketRepository.java
+ repository.TicketRepository
+repository/GameRepository.java
+ repository.GameRepository
+Main.java
+ Main
+repository/database/GameDbRepository.java
+ repository.database.GameDbRepository
+repository/database/UserDbRepository.java
+ repository.database.UserDbRepository
