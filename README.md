@@ -19,12 +19,12 @@ meci nu mai sunt locuri disponbile, mesajul ”SOLD OUT” este afișat lângă 
 
 ## Organizare
 
-Pentru fiecare saptamana se foloseste un branch diferit, cate unul pentru fiecare saptamana inn care se preda tama.
+Pentru fiecare saptamana se foloseste un branch diferit, cate unul pentru fiecare saptamana in care se preda tama.
 
 Lista saptamanilor (temele facute se taie cu o linie orizontala):
 
 - ~~saptamana 3~~
-- saptamana 4
+- ~~saptamana 4~~
 - saptamana 5
 - saptamana 6
 - saptamana 7
