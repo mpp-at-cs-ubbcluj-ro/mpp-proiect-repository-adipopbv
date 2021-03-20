@@ -1,5 +1,8 @@
-﻿using System.Data;
-using pr1_cs.DbUtils;
+﻿using System;
+using System.Configuration;
+using System.Data;
+using Mono.Data.Sqlite;
+using pr1_cs.Domain.Exceptions;
 
 namespace pr1_cs.Repository.Database
 {
@@ -26,7 +29,14 @@ namespace pr1_cs.Repository.Database
 
         private static IDbConnection GetNewConnection()
         {
-            return ConnectionFactory.Instance.CreateConnection();
+            try
+            {
+                return new SqliteConnection(ConfigurationManager.AppSettings["sqliteConnectionString"]);
+            }
+            catch (Exception exception)
+            {
+                throw new DatabaseException("database error: " + exception);
+            }
         }
     }
 }
