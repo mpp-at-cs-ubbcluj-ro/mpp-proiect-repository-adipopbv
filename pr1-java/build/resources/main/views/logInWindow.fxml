@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="355.0" prefWidth="270.0"
             style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11.0.1"
-            fx:controller="userInterfacing.controllers.LogInController">
+            fx:controller="userInterfacing.LogInController">
     <Text fill="WHITE" layoutX="22.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Basketball teams!"
           textAlignment="CENTER" wrappingWidth="230.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="19.0"
           AnchorPane.topAnchor="23.274999618530273">
@@ -17,14 +17,14 @@
     </Text>
     <Separator layoutX="35.0" layoutY="72.0" prefWidth="200.0" AnchorPane.leftAnchor="35.0"
                AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="80.0"/>
-    <Button fx:id="logInAcceptButton" layoutX="94.0" layoutY="193.0" mnemonicParsing="false" onAction="#logIn"
+    <Button fx:id="logInButton" layoutX="94.0" layoutY="193.0" mnemonicParsing="false" onAction="#logIn"
             prefHeight="26.0" prefWidth="81.0" text="Accept" AnchorPane.leftAnchor="94.0" AnchorPane.rightAnchor="95.0"
             AnchorPane.topAnchor="193.0">
         <font>
             <Font name="Noto Sans Regular" size="14.0"/>
         </font>
     </Button>
-    <TextField fx:id="logInUserIdField" alignment="CENTER" layoutX="51.0" layoutY="148.0" promptText="username..."
+    <TextField fx:id="userIdField" alignment="CENTER" layoutX="51.0" layoutY="148.0" promptText="username..."
                AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="148.0">
         <font>
             <Font name="Noto Sans Regular" size="14.0"/>
@@ -44,7 +44,7 @@
             <Font name="Noto Sans Regular" size="14.0"/>
         </font>
     </Text>
-    <Button fx:id="logInToSignUpButton" layoutX="96.0" layoutY="303.0" mnemonicParsing="false" onAction="#toSignUp"
+    <Button fx:id="toSignUpButton" layoutX="96.0" layoutY="303.0" mnemonicParsing="false" onAction="#toSignUp"
             prefHeight="26.0" prefWidth="81.0" text="Sign up" AnchorPane.leftAnchor="96.0" AnchorPane.rightAnchor="94.0"
             AnchorPane.topAnchor="303.0">
         <font>

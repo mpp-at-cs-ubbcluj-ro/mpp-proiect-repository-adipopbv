@@ -1,42 +1,48 @@
-repository/UserRepository.java
- repository.UserRepository
-domain/Ticket.java
- domain.Ticket
-domain/Game.java
- domain.Game
-domain/exceptions/DuplicateException.java
- domain.exceptions.DuplicateException
-domain/Entity.java
- domain.Entity
-repository/TicketRepository.java
- repository.TicketRepository
 domain/exceptions/NotFoundException.java
  domain.exceptions.NotFoundException
+domain/exceptions/DatabaseException.java
+ domain.exceptions.DatabaseException
+repository/database/DbUtils.java
+ repository.database.DbUtils
+domain/exceptions/DuplicateException.java
+ domain.exceptions.DuplicateException
+domain/exceptions/LogInException.java
+ domain.exceptions.LogInException
+utils/Configuration.java
+ utils.Configuration
+domain/User.java
+ domain.User
+domain/Game.java
+ domain.Game
+repository/UserRepository.java
+ repository.UserRepository
+repository/database/UserDbRepository.java
+ repository.database.UserDbRepository
+repository/database/GameDbRepository.java
+ repository.database.GameDbRepository
+repository/database/TicketDbRepository.java
+ repository.database.TicketDbRepository
 repository/Repository.java
  repository.Repository
 repository/GameRepository.java
  repository.GameRepository
-domain/User.java
- domain.User
+domain/Ticket.java
+ domain.Ticket
+repository/TicketRepository.java
+ repository.TicketRepository
+domain/Entity.java
+ domain.Entity
 services/Service.java
  services.Service
 userInterfacing/UserInterface.java
  userInterfacing.UserInterface
-domain/exceptions/DatabaseException.java
- domain.exceptions.DatabaseException
-JavaFxMain.java
- JavaFxMain
-repository/database/GameDbRepository.java
- repository.database.GameDbRepository
-CliMain.java
- CliMain
-repository/database/UserDbRepository.java
- repository.database.UserDbRepository
-repository/database/DbUtils.java
- repository.database.DbUtils
-repository/database/TicketDbRepository.java
- repository.database.TicketDbRepository
-utils/Configuration.java
- utils.Configuration
-userInterfacing/controllers/LogInController.java
- userInterfacing.controllers.LogInController
+Main.java
+ Main
+userInterfacing/LogInController.java
+ userInterfacing.LogInController
+userInterfacing/SignUpController.java
+ userInterfacing.SignUpController
+userInterfacing/JavaFxClient.java
+ userInterfacing.JavaFxClient
+userInterfacing/MainController.java
+ userInterfacing.MainController
