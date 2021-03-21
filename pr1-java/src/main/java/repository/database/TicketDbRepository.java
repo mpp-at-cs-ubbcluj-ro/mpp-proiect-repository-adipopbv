@@ -2,11 +2,13 @@ package repository.database;
 
 import domain.Game;
 import domain.Ticket;
+import domain.exceptions.DatabaseException;
 import domain.exceptions.DuplicateException;
 import domain.exceptions.NotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import repository.TicketRepository;
+import utils.Configuration;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,19 +19,15 @@ import java.util.List;
 import java.util.Properties;
 
 public class TicketDbRepository implements TicketRepository {
-    private final JdbcUtils dbUtils;
-    private static final Logger logger = LogManager.getLogger();
-
-    public TicketDbRepository(Properties properties) {
-        logger.info("Initializing TicketDbRepository with properties: {} ", properties);
-        dbUtils = new JdbcUtils(properties);
+    public TicketDbRepository() {
+        Configuration.logger.info("Initializing TicketDbRepository with properties: {} ", Configuration.properties);
     }
 
     @Override
     public Iterable<Ticket> getAll() {
-        logger.traceEntry();
+        Configuration.logger.traceEntry();
 
-        Connection connection = dbUtils.getConnection();
+        Connection connection = DbUtils.getConnection();
         List<Ticket> tickets = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement("select * from tickets inner join games on games.gameId = tickets.forGameId;")) {
             try (ResultSet result = preparedStatement.executeQuery()) {
@@ -37,46 +35,44 @@ public class TicketDbRepository implements TicketRepository {
                     Integer id = result.getInt("ticketId");
                     String clientName = result.getString("clientName");
 
-                    Ticket ticket = new Ticket(id, getGameFromResultSet(result), clientName);
+                    Ticket ticket = new Ticket(id, GameDbRepository.getGameFromResultSet(result), clientName);
                     tickets.add(ticket);
                 }
-            } catch (NotFoundException exception) {
-                logger.error(exception);
             }
         } catch (SQLException exception) {
-            logger.error(exception);
+            Configuration.logger.error(exception);
         }
 
-        logger.traceExit(tickets);
+        Configuration.logger.traceExit(tickets);
         return tickets;
     }
 
     @Override
     public Ticket getOne(Integer id) throws NotFoundException {
-        logger.traceEntry();
+        Configuration.logger.traceEntry();
 
-        Connection connection = dbUtils.getConnection();
+        Connection connection = DbUtils.getConnection();
         Ticket ticket = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement("select * from tickets inner join games on games.gameId = tickets.forGameId where ticketId = " + id + ";")) {
             try (ResultSet result = preparedStatement.executeQuery()) {
                 String clientName = result.getString("clientName");
 
-                ticket = new Ticket(id, getGameFromResultSet(result), clientName);
+                ticket = new Ticket(id, GameDbRepository.getGameFromResultSet(result), clientName);
             } catch (SQLException exception) {
-                logger.error(exception);
+                Configuration.logger.error(exception);
                 throw new NotFoundException();
             }
         } catch (SQLException exception) {
-            logger.error(exception);
+            Configuration.logger.error(exception);
         }
 
-        logger.traceExit(ticket);
+        Configuration.logger.traceExit(ticket);
         return ticket;
     }
 
     @Override
     public Ticket add(Ticket ticket) throws DuplicateException {
-        logger.traceEntry("Saving ticket {} ", ticket);
+        Configuration.logger.traceEntry("Saving ticket {} ", ticket);
 
         try {
             getOne(ticket.getId());
@@ -84,73 +80,58 @@ public class TicketDbRepository implements TicketRepository {
         } catch (NotFoundException ignored) {
         }
 
-        Connection connection = dbUtils.getConnection();
+        Connection connection = DbUtils.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement("insert into tickets(ticketId, forGameId, clientName) " + "values(?,?,?);")) {
             preparedStatement.setInt(1, ticket.getId());
             preparedStatement.setInt(2, ticket.getForGame().getId());
             preparedStatement.setString(3, ticket.getClientName());
 
             int result = preparedStatement.executeUpdate();
-            logger.trace("Saved {} instances", result);
+            Configuration.logger.trace("Saved {} instances", result);
         } catch (SQLException exception) {
-            logger.error(exception);
+            Configuration.logger.error(exception);
         }
 
-        logger.traceExit(ticket);
+        Configuration.logger.traceExit(ticket);
         return ticket;
     }
 
     @Override
     public Ticket remove(Integer id) throws NotFoundException {
-        logger.traceEntry("Removing ticket with id {} ", id);
+        Configuration.logger.traceEntry("Removing ticket with id {} ", id);
 
         Ticket ticket = getOne(id);
-        Connection connection = dbUtils.getConnection();
+        Connection connection = DbUtils.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement("delete from tickets where ticketId = " + id + ";")) {
             int result = preparedStatement.executeUpdate();
-            logger.trace("Deleted {} instances", result);
+            Configuration.logger.trace("Deleted {} instances", result);
         } catch (SQLException exception) {
-            logger.error(exception);
+            Configuration.logger.error(exception);
             throw new NotFoundException();
         }
 
-        logger.traceExit(ticket);
+        Configuration.logger.traceExit(ticket);
         return ticket;
     }
 
     @Override
     public Ticket modify(Integer id, Ticket newTicket) throws NotFoundException {
-        logger.traceEntry("Modifying ticket with id {} ", id);
+        Configuration.logger.traceEntry("Modifying ticket with id {} ", id);
 
         Ticket oldTicket = getOne(id);
-        Connection connection = dbUtils.getConnection();
+        Connection connection = DbUtils.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement("update tickets set " +
                 "forGameId = " + newTicket.getForGame().getId() +
                 ", clientName = '" + newTicket.getClientName() +
                 "' where ticketId = " + id + ";")) {
             int result = preparedStatement.executeUpdate();
-            logger.trace("Modified {} instances", result);
+            Configuration.logger.trace("Modified {} instances", result);
         } catch (SQLException exception) {
-            logger.error(exception);
+            Configuration.logger.error(exception);
         }
 
-        logger.traceExit(oldTicket);
+        Configuration.logger.traceExit(oldTicket);
         return oldTicket;
-    }
-
-    private Game getGameFromResultSet(ResultSet result) throws NotFoundException {
-        try {
-            Integer gameId = result.getInt("gameId");
-            String name = result.getString("name");
-            String homeTeam = result.getString("homeTeam");
-            String awayTeam = result.getString("awayTeam");
-            Integer availableSeats = result.getInt("availableSeats");
-            Integer seatCost = result.getInt("seatCost");
-            return new Game(gameId, name, homeTeam, awayTeam, availableSeats, seatCost);
-        } catch (SQLException exception) {
-            logger.error(exception);
-            throw new NotFoundException();
-        }
     }
 
     @Override

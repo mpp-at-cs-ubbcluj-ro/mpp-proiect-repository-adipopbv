@@ -1,34 +1,42 @@
-repository/database/JdbcUtils.java
- repository.database.JdbcUtils
-clients/JavaFxClient.java
- clients.JavaFxClient
+repository/UserRepository.java
+ repository.UserRepository
+domain/Ticket.java
+ domain.Ticket
 domain/Game.java
  domain.Game
 domain/exceptions/DuplicateException.java
  domain.exceptions.DuplicateException
-repository/database/UserDbRepository.java
- repository.database.UserDbRepository
-repository/database/TicketDbRepository.java
- repository.database.TicketDbRepository
+domain/Entity.java
+ domain.Entity
+repository/TicketRepository.java
+ repository.TicketRepository
 domain/exceptions/NotFoundException.java
  domain.exceptions.NotFoundException
 repository/Repository.java
  repository.Repository
 repository/GameRepository.java
  repository.GameRepository
-Main.java
- Main
-clients/controllers/LogInController.java
- clients.controllers.LogInController
-repository/database/GameDbRepository.java
- repository.database.GameDbRepository
-repository/TicketRepository.java
- repository.TicketRepository
-domain/Entity.java
- domain.Entity
-repository/UserRepository.java
- repository.UserRepository
-domain/Ticket.java
- domain.Ticket
 domain/User.java
  domain.User
+services/Service.java
+ services.Service
+userInterfacing/UserInterface.java
+ userInterfacing.UserInterface
+domain/exceptions/DatabaseException.java
+ domain.exceptions.DatabaseException
+JavaFxMain.java
+ JavaFxMain
+repository/database/GameDbRepository.java
+ repository.database.GameDbRepository
+CliMain.java
+ CliMain
+repository/database/UserDbRepository.java
+ repository.database.UserDbRepository
+repository/database/DbUtils.java
+ repository.database.DbUtils
+repository/database/TicketDbRepository.java
+ repository.database.TicketDbRepository
+utils/Configuration.java
+ utils.Configuration
+userInterfacing/controllers/LogInController.java
+ userInterfacing.controllers.LogInController
