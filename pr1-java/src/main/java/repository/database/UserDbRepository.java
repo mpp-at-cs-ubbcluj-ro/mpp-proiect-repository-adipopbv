@@ -153,7 +153,7 @@ public class UserDbRepository implements UserRepository {
         User user = getOne(id);
         Connection connection = DbUtils.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement("update users set status = '" + status + "' where userId = " + id + ";")) {
-            int result = preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
             Configuration.logger.trace("Status set for {}", user);
         } catch (SQLException exception) {
             Configuration.logger.error(exception);

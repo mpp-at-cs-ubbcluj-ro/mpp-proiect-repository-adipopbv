@@ -58,23 +58,23 @@ public class TicketDbRepository implements TicketRepository {
     }
 
     @Override
-    public Ticket add(Ticket ticket) throws DuplicateException {
+    public Ticket add(Ticket ticket) {
         Configuration.logger.traceEntry("Saving ticket {} ", ticket);
 
-        try {
-            getOne(ticket.getId());
-            throw new DuplicateException();
-        } catch (NotFoundException ignored) {
-        }
-
         Connection connection = DbUtils.getConnection();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("insert into tickets(ticketId, forGameId, clientName) " + "values(?,?,?);")) {
-            preparedStatement.setInt(1, ticket.getId());
-            preparedStatement.setInt(2, ticket.getForGame().getId());
-            preparedStatement.setString(3, ticket.getClientName());
+        try (PreparedStatement preparedStatement = connection.prepareStatement("insert into tickets(forGameId, clientName) " + "values(?,?);")) {
+            preparedStatement.setInt(1, ticket.getForGame().getId());
+            preparedStatement.setString(2, ticket.getClientName());
 
             int result = preparedStatement.executeUpdate();
             Configuration.logger.trace("Saved {} instances", result);
+        } catch (SQLException exception) {
+            Configuration.logger.error(exception);
+        }
+
+        try (ResultSet result = connection.prepareStatement("select max(ticketId) as ticketId from tickets").executeQuery()) {
+            ticket.setId(result.getInt("ticketId"));
+            Configuration.logger.trace("Got id for {}", ticket);
         } catch (SQLException exception) {
             Configuration.logger.error(exception);
         }

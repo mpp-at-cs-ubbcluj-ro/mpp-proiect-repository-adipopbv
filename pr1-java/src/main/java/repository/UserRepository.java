@@ -8,9 +8,9 @@ public interface UserRepository extends Repository<Integer, User> {
     /**
      * Sets a user's status
      *
-     * @param id     the user's id
+     * @param id     the user id of the user
      * @param status the new user status
-     * @return the user with the updated status
+     * @return the updated user
      */
     User setUserStatus(Integer id, String status) throws NotFoundException;
 

@@ -132,7 +132,7 @@ public class GameDbRepository implements GameRepository {
     }
 
     @Override
-    public Iterable<Game> getGamesOrderedByAvailableSeats(Boolean reverse) {
+    public Iterable<Game> getGamesByAvailableSeatsDescending(Boolean reverse) {
         Configuration.logger.traceEntry();
 
         Connection connection = DbUtils.getConnection();
@@ -147,6 +147,23 @@ public class GameDbRepository implements GameRepository {
 
         Configuration.logger.traceExit(games);
         return games;
+    }
+
+    @Override
+    public Game setGameAvailableSeats(Integer id, Integer availableSeats) throws NotFoundException {
+        Configuration.logger.traceEntry();
+
+        Game game = getOne(id);
+        Connection connection = DbUtils.getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement("update games set availableSeats = " + availableSeats + " where gameId = " + id + ";")) {
+            preparedStatement.executeUpdate();
+            Configuration.logger.trace("Available seats set for {}", game);
+        } catch (SQLException exception) {
+            Configuration.logger.error(exception);
+        }
+
+        Configuration.logger.traceExit(game);
+        return game;
     }
 
     private void getGamesFromDatabase(List<Game> games, PreparedStatement preparedStatement) throws SQLException {

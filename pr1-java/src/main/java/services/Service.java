@@ -1,12 +1,18 @@
 package services;
 
+import domain.Game;
+import domain.Ticket;
 import domain.User;
 import domain.exceptions.DuplicateException;
 import domain.exceptions.LogInException;
 import domain.exceptions.NotFoundException;
+import domain.exceptions.ParameterException;
 import repository.GameRepository;
 import repository.TicketRepository;
 import repository.UserRepository;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class Service {
     private final UserRepository userRepository;
@@ -25,7 +31,7 @@ public class Service {
      * @param username the username of the user to be logged in
      * @return the logged in user
      * @throws NotFoundException if user not found
-     * @throws LogInException if user already logged in
+     * @throws LogInException    if user already logged in
      */
     public User logInUser(String username) throws NotFoundException, LogInException {
         User user = userRepository.getOne(username);
@@ -41,7 +47,7 @@ public class Service {
      * @param username the username of the user to be logged out
      * @return the logged out user
      * @throws NotFoundException if user not found
-     * @throws LogInException if user already logged out
+     * @throws LogInException    if user already logged out
      */
     public User logOutUser(String username) throws NotFoundException, LogInException {
         User user = userRepository.getOne(username);
@@ -62,5 +68,33 @@ public class Service {
         User user = new User(username, "logged-in");
         user = userRepository.add(user);
         return user;
+    }
+
+    public Collection<Game> getAllGames() {
+        Collection<Game> games = new ArrayList<>();
+        for (Game game : gameRepository.getAll())
+            games.add(game);
+        return games;
+    }
+
+    public void sellSeats(Game game, String clientName, Integer seatsCount) throws ParameterException, NotFoundException {
+        if (game.getAvailableSeats() < seatsCount)
+            throw new ParameterException("not enough seats available");
+        gameRepository.setGameAvailableSeats(game.getId(), game.getAvailableSeats() - seatsCount);
+        while (seatsCount != 0) {
+            try {
+                ticketRepository.add(new Ticket(game, clientName));
+            } catch (DuplicateException ignored) {
+            }
+            seatsCount--;
+        }
+    }
+
+    public Collection<Game> getGamesWithAvailableSeatsDescending() {
+        Collection<Game> games = new ArrayList<>();
+        for (Game game : gameRepository.getGamesByAvailableSeatsDescending(true))
+            if (game.getAvailableSeats() > 0)
+                games.add(game);
+        return games;
     }
 }
