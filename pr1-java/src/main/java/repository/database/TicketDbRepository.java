@@ -1,12 +1,8 @@
 package repository.database;
 
-import domain.Game;
 import domain.Ticket;
-import domain.exceptions.DatabaseException;
 import domain.exceptions.DuplicateException;
 import domain.exceptions.NotFoundException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import repository.TicketRepository;
 import utils.Configuration;
 
@@ -16,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 public class TicketDbRepository implements TicketRepository {
     public TicketDbRepository() {
@@ -29,15 +24,12 @@ public class TicketDbRepository implements TicketRepository {
 
         Connection connection = DbUtils.getConnection();
         List<Ticket> tickets = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("select * from tickets inner join games on games.gameId = tickets.forGameId;")) {
-            try (ResultSet result = preparedStatement.executeQuery()) {
-                while (result.next()) {
-                    Integer id = result.getInt("ticketId");
-                    String clientName = result.getString("clientName");
-
-                    Ticket ticket = new Ticket(id, GameDbRepository.getGameFromResultSet(result), clientName);
-                    tickets.add(ticket);
-                }
+        try (ResultSet result = connection.prepareStatement("select * from tickets inner join games on games.gameId = tickets.forGameId;").executeQuery()) {
+            while (result.next()) {
+                Integer id = result.getInt("ticketId");
+                String clientName = result.getString("clientName");
+                Ticket ticket = new Ticket(id, GameDbRepository.getGameFromResultSet(result), clientName);
+                tickets.add(ticket);
             }
         } catch (SQLException exception) {
             Configuration.logger.error(exception);
@@ -53,17 +45,12 @@ public class TicketDbRepository implements TicketRepository {
 
         Connection connection = DbUtils.getConnection();
         Ticket ticket = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement("select * from tickets inner join games on games.gameId = tickets.forGameId where ticketId = " + id + ";")) {
-            try (ResultSet result = preparedStatement.executeQuery()) {
-                String clientName = result.getString("clientName");
-
-                ticket = new Ticket(id, GameDbRepository.getGameFromResultSet(result), clientName);
-            } catch (SQLException exception) {
-                Configuration.logger.error(exception);
-                throw new NotFoundException();
-            }
+        try (ResultSet result = connection.prepareStatement("select * from tickets inner join games on games.gameId = tickets.forGameId where ticketId = " + id + ";").executeQuery()) {
+            String clientName = result.getString("clientName");
+            ticket = new Ticket(id, GameDbRepository.getGameFromResultSet(result), clientName);
         } catch (SQLException exception) {
             Configuration.logger.error(exception);
+            throw new NotFoundException();
         }
 
         Configuration.logger.traceExit(ticket);

@@ -24,16 +24,13 @@ public class UserDbRepository implements UserRepository {
 
         Connection connection = DbUtils.getConnection();
         List<User> users = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("select * from users;")) {
-            try (ResultSet result = preparedStatement.executeQuery()) {
-                while (result.next()) {
-                    Integer userId = result.getInt("userId");
-                    String username = result.getString("username");
-                    String status = result.getString("status");
-
-                    User user = new User(userId, username, status);
-                    users.add(user);
-                }
+        try (ResultSet result = connection.prepareStatement("select * from users;").executeQuery()) {
+            while (result.next()) {
+                Integer userId = result.getInt("userId");
+                String username = result.getString("username");
+                String status = result.getString("status");
+                User user = new User(userId, username, status);
+                users.add(user);
             }
         } catch (SQLException exception) {
             Configuration.logger.error(exception);
@@ -48,23 +45,17 @@ public class UserDbRepository implements UserRepository {
         Configuration.logger.traceEntry();
 
         Connection connection = DbUtils.getConnection();
-        User user = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement("select * from users where userId = " + id + ";")) {
-            try (ResultSet result = preparedStatement.executeQuery()) {
-                String username = result.getString("username");
-                String status = result.getString("status");
+        try (ResultSet result = connection.prepareStatement("select * from users where userId = " + id + ";").executeQuery()) {
+            String username = result.getString("username");
+            String status = result.getString("status");
+            User user = new User(id, username, status);
 
-                user = new User(id, username, status);
-            } catch (SQLException exception) {
-                Configuration.logger.error(exception);
-                throw new NotFoundException();
-            }
+            Configuration.logger.traceExit(user);
+            return user;
         } catch (SQLException exception) {
             Configuration.logger.error(exception);
+            throw new NotFoundException();
         }
-
-        Configuration.logger.traceExit(user);
-        return user;
     }
 
     @Override

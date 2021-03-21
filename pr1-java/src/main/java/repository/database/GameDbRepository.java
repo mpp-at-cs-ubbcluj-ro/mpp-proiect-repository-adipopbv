@@ -18,6 +18,16 @@ public class GameDbRepository implements GameRepository {
         Configuration.logger.info("Initializing GameDbRepository with properties: {} ", Configuration.properties);
     }
 
+    public static Game getGameFromResultSet(ResultSet resultSet) throws SQLException {
+        Integer gameId = resultSet.getInt("gameId");
+        String name = resultSet.getString("name");
+        String homeTeam = resultSet.getString("homeTeam");
+        String awayTeam = resultSet.getString("awayTeam");
+        Integer availableSeats = resultSet.getInt("availableSeats");
+        Integer seatCost = resultSet.getInt("seatCost");
+        return new Game(gameId, name, homeTeam, awayTeam, availableSeats, seatCost);
+    }
+
     @Override
     public Iterable<Game> getAll() {
         Configuration.logger.traceEntry();
@@ -39,20 +49,15 @@ public class GameDbRepository implements GameRepository {
         Configuration.logger.traceEntry();
 
         Connection connection = DbUtils.getConnection();
-        Game game = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement("select * from games where gameId = " + id + ";")) {
-            try (ResultSet result = preparedStatement.executeQuery()) {
-                game = getGameFromResultSet(result);
-            } catch (SQLException exception) {
-                Configuration.logger.error(exception);
-                throw new NotFoundException();
-            }
+        try (ResultSet result = connection.prepareStatement("select * from games where gameId = " + id + ";").executeQuery()) {
+            Game game = getGameFromResultSet(result);
+
+            Configuration.logger.traceExit(game);
+            return game;
         } catch (SQLException exception) {
             Configuration.logger.error(exception);
+            throw new NotFoundException();
         }
-
-        Configuration.logger.traceExit(game);
-        return game;
     }
 
     @Override
@@ -151,16 +156,6 @@ public class GameDbRepository implements GameRepository {
                 games.add(game);
             }
         }
-    }
-
-    public static Game getGameFromResultSet(ResultSet resultSet) throws SQLException {
-        Integer gameId = resultSet.getInt("gameId");
-        String name = resultSet.getString("name");
-        String homeTeam = resultSet.getString("homeTeam");
-        String awayTeam = resultSet.getString("awayTeam");
-        Integer availableSeats = resultSet.getInt("availableSeats");
-        Integer seatCost = resultSet.getInt("seatCost");
-        return new Game(gameId, name, homeTeam, awayTeam, availableSeats, seatCost);
     }
 
     @Override
