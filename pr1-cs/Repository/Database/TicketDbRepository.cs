@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using log4net;
+using Mono.Data.Sqlite;
 using pr1_cs.Domain;
 using pr1_cs.Domain.Exceptions;
 
@@ -92,9 +93,14 @@ namespace pr1_cs.Repository.Database
                 dataParameter.Value = ticket.ClientName;
                 command.Parameters.Add(dataParameter);
 
-                var result = command.ExecuteNonQuery();
-                if (result == 0)
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (SqliteException exception)
+                {
                     throw new DuplicateException();
+                }
 
                 command.CommandText = "select max(ticketId) as ticketId from tickets;";
                 using (var dataReader = command.ExecuteReader())

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <object class="GtkWindow" id="Window">
+    <property name="can-focus">False</property>
+    <child>
+      <object class="GtkFixed">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkLabel" id="WelcomeLabel">
+            <property name="width-request">184</property>
+            <property name="height-request">42</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Welcome user!</property>
+            <attributes>
+              <attribute name="font-desc" value="Noto Sans 20"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">325</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="width-request">809</property>
+            <property name="height-request">20</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+          </object>
+          <packing>
+            <property name="x">15</property>
+            <property name="y">44</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="LogOutButton">
+            <property name="label" translatable="yes">Log out</property>
+            <property name="width-request">95</property>
+            <property name="height-request">33</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <signal name="clicked" handler="LogOut" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">734</property>
+            <property name="y">464</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

@@ -1,4 +1,6 @@
 using System;
+using System.Configuration;
+using GLib;
 using Gtk;
 using pr1_cs.Domain;
 using pr1_cs.Domain.Exceptions;
@@ -6,16 +8,16 @@ using pr1_cs.Services;
 
 namespace pr1_cs.UserInterfacing
 {
-    public class LogInController : UserInterface
+    public class LogInController : GuiController
     {
         public LogInController(Service service, User loggedUser) : base(service, loggedUser)
         {
-            OwnedWindow = (Window) GtkClient.ClientElements.GetObject("LogInWindow");
+            GuiElements.AddFromFile(ConfigurationManager.AppSettings["logInWindow"]);
+            GuiElements.Autoconnect(this);
+            OwnedWindow = (Window) GuiElements.GetObject("Window");
             OwnedWindow.DeleteEvent += delegate
             {
-                GtkClient.OpenWindows--;
-                if (GtkClient.OpenWindows <= 0)
-                    Application.Quit();
+                Close();
             };
         }
 
@@ -23,19 +25,11 @@ namespace pr1_cs.UserInterfacing
         {
             try
             {
-                var username = ((Entry) GtkClient.ClientElements.GetObject("LogInUsernameEntry")).Text;
-                LoggedUser = Service.LogInUser(username);
+                var username = ((Entry) GuiElements.GetObject("UsernameEntry")).Text;
+                new MainController(Service, Service.LogInUser(username)).Open();
                 Close();
             }
-            catch (NotFoundException exception)
-            {
-                var dialog = new MessageDialog(OwnedWindow,
-                    DialogFlags.DestroyWithParent, MessageType.Error,
-                    ButtonsType.Close, exception.Message);
-                dialog.Run();
-                dialog.Destroy();
-            }
-            catch (LogInException exception)
+            catch (Exception exception)
             {
                 var dialog = new MessageDialog(OwnedWindow,
                     DialogFlags.DestroyWithParent, MessageType.Error,
@@ -47,8 +41,7 @@ namespace pr1_cs.UserInterfacing
 
         public void ToSignUp(object sender, EventArgs args)
         {
-            var signUpController = new SignUpController(Service, null);
-            signUpController.Open();
+            new SignUpController(Service, null).Open();
             Close();
         }
     }
