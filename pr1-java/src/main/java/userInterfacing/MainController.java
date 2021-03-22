@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import services.Service;
@@ -52,33 +53,53 @@ public class MainController extends UserInterface {
         awayTeamColumn.setCellValueFactory(new PropertyValueFactory<>("awayTeam"));
         seatCostColumn.setCellValueFactory(new PropertyValueFactory<>("seatCost"));
         availableSeatsColumn.setCellValueFactory(new PropertyValueFactory<>("availableSeats"));
+        availableSeatsColumn.setCellFactory(availableSeat -> new TableCell<>() {
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+                if (!empty  && item <= 0) {
+                    setText("SOLD OUT");
+                    setStyle("-fx-text-fill: red");
+                } else if (!empty) {
+                    setText(item.toString());
+                    setStyle("-fx-text-fill: black");
+                } else {
+                    setText("");
+                    setStyle("-fx-text-fill: black");
+                }
+            }
+        });
         gamesTable.setItems(games);
-    }
-
-    @FXML
-    public void logOut() {
-        try {
-            service.logOutUser(loggedInUser.getUsername());
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "logged out successfully");
-            alert.show();
-            ((Stage) logOutButton.getScene().getWindow()).close();
-        } catch (LogInException | NotFoundException exception) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, exception.getMessage());
-            alert.show();
-        }
     }
 
     @FXML
     public void sellSeats() {
         try {
+            if (gamesTable.getSelectionModel().getSelectedItem() == null) throw new NotFoundException("no game selected");
             service.sellSeats(gamesTable.getSelectionModel().getSelectedItem(), clientNameField.getText(), seatsCountSpinner.getValue());
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "seats sold successfully");
+            gamesTable.getSelectionModel().clearSelection();
+            clientNameField.clear();
+            seatsCountSpinner.getValueFactory().setValue(1);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "seats sold successfully");
             alert.show();
         } catch (ParameterException | NotFoundException exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR, exception.getMessage());
             alert.show();
         }
         update();
+    }
+
+    @FXML
+    public void logOut() {
+        try {
+            service.logOutUser(loggedInUser.getUsername());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "logged out successfully");
+            alert.show();
+            ((Stage) logOutButton.getScene().getWindow()).close();
+        } catch (LogInException | NotFoundException exception) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, exception.getMessage());
+            alert.show();
+        }
     }
 
     @Override

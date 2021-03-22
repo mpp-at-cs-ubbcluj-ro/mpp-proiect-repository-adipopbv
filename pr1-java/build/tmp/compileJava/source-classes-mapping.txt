@@ -40,15 +40,16 @@ repository/GameRepository.java
  repository.GameRepository
 userInterfacing/UserInterface.java
  userInterfacing.UserInterface
+repository/database/TicketDbRepository.java
+ repository.database.TicketDbRepository
+userInterfacing/JavaFxClient.java
+ userInterfacing.JavaFxClient
+repository/database/GameDbRepository.java
+ repository.database.GameDbRepository
 userInterfacing/LogInController.java
  userInterfacing.LogInController
 userInterfacing/SignUpController.java
  userInterfacing.SignUpController
-repository/database/GameDbRepository.java
- repository.database.GameDbRepository
 userInterfacing/MainController.java
  userInterfacing.MainController
-userInterfacing/JavaFxClient.java
- userInterfacing.JavaFxClient
-repository/database/TicketDbRepository.java
- repository.database.TicketDbRepository
+ userInterfacing.MainController$1
