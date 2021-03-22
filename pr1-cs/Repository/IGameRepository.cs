@@ -5,6 +5,8 @@ namespace pr1_cs.Repository
 {
     public interface IGameRepository : IRepository<int, Game>
     {
-        IEnumerable<Game> GetGamesOrderedByAvailableSeats(bool reverse);
+        IEnumerable<Game> GetGamesByAvailableSeatsDescending(bool reverse);
+        
+        Game SetGameAvailableSeats(int id, int availableSeats);
     }
 }

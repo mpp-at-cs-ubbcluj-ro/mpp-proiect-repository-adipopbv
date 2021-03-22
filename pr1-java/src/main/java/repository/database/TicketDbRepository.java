@@ -72,7 +72,7 @@ public class TicketDbRepository implements TicketRepository {
             Configuration.logger.error(exception);
         }
 
-        try (ResultSet result = connection.prepareStatement("select max(ticketId) as ticketId from tickets").executeQuery()) {
+        try (ResultSet result = connection.prepareStatement("select max(ticketId) as ticketId from tickets;").executeQuery()) {
             ticket.setId(result.getInt("ticketId"));
             Configuration.logger.trace("Got id for {}", ticket);
         } catch (SQLException exception) {

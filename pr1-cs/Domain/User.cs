@@ -2,34 +2,35 @@ namespace pr1_cs.Domain
 {
     public class User : Entity<int>
     {
-        private string _username;
-        private string _status;
-
-        public string Username
+        public User(string username)
         {
-            get => _username;
-            set => _username = value;
+            Username = username;
+            Status = "logged-out";
         }
 
-        public string Status
+        public User(string username, string status)
         {
-            get => _status;
-            set => _status = value;
+            Username = username;
+            Status = status;
         }
 
         public User(int id, string username, string status) : base(id)
         {
-            _username = username;
-            _status = status;
+            Username = username;
+            Status = status;
         }
+
+        public string Username { get; set; }
+
+        public string Status { get; set; }
 
         public override string ToString()
         {
-		    return "User{" +
-                "id='" + Id+ '\'' +
-                ", username='" + Username + '\'' +
-                ", status='" + Status + '\'' +
-                '}';
+            return "User{" +
+                   "id='" + Id + '\'' +
+                   ", username='" + Username + '\'' +
+                   ", status='" + Status + '\'' +
+                   '}';
         }
     }
 }

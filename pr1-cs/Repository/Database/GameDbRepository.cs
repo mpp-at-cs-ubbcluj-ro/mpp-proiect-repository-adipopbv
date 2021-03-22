@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data;
 using log4net;
 using pr1_cs.Domain;
 using pr1_cs.Domain.Exceptions;
@@ -23,21 +24,7 @@ namespace pr1_cs.Repository.Database
             using (var command = connection.CreateCommand())
             {
                 command.CommandText = "select * from games;";
-                using (var dataReader = command.ExecuteReader())
-                {
-                    while (dataReader.Read())
-                    {
-                        var gameId = dataReader.GetInt32(dataReader.GetOrdinal("gameId"));
-                        var name = dataReader.GetString(dataReader.GetOrdinal("name"));
-                        var homeTeam = dataReader.GetString(dataReader.GetOrdinal("homeTeam"));
-                        var awayTeam = dataReader.GetString(dataReader.GetOrdinal("awayTeam"));
-                        var availableSeats = dataReader.GetInt32(dataReader.GetOrdinal("availableSeats"));
-                        var seatCost = dataReader.GetInt32(dataReader.GetOrdinal("seatCost"));
-
-                        var game = new Game(gameId, name, homeTeam, awayTeam, availableSeats, seatCost);
-                        games.Add(game);
-                    }
-                }
+                GetGamesFromDatabase(command, games);
             }
 
             Log.InfoFormat("Exiting GetAll with values {0}", games);
@@ -56,20 +43,9 @@ namespace pr1_cs.Repository.Database
                 using (var dataReader = command.ExecuteReader())
                 {
                     if (dataReader.Read())
-                    {
-                        var gameId = dataReader.GetInt32(dataReader.GetOrdinal("gameId"));
-                        var name = dataReader.GetString(dataReader.GetOrdinal("name"));
-                        var homeTeam = dataReader.GetString(dataReader.GetOrdinal("homeTeam"));
-                        var awayTeam = dataReader.GetString(dataReader.GetOrdinal("awayTeam"));
-                        var availableSeats = dataReader.GetInt32(dataReader.GetOrdinal("availableSeats"));
-                        var seatCost = dataReader.GetInt32(dataReader.GetOrdinal("seatCost"));
-
-                        game = new Game(gameId, name, homeTeam, awayTeam, availableSeats, seatCost);
-                    }
+                        game = GetGameFromDataReader(dataReader);
                     else
-                    {
                         throw new NotFoundException();
-                    }
                 }
             }
 
@@ -168,9 +144,9 @@ namespace pr1_cs.Repository.Database
             return oldGame;
         }
 
-        public IEnumerable<Game> GetGamesOrderedByAvailableSeats(bool reverse)
+        public IEnumerable<Game> GetGamesByAvailableSeatsDescending(bool reverse)
         {
-            Log.Info("Entering GetGamesOrderedByAvailableSeats");
+            Log.Info("Entering GetGamesByAvailableSeatsDescending");
 
             var games = new List<Game>();
             var connection = DbUtils.Connection;
@@ -180,23 +156,50 @@ namespace pr1_cs.Repository.Database
                 command.CommandText += reverse ? " desc;" : ";";
                 using (var dataReader = command.ExecuteReader())
                 {
-                    while (dataReader.Read())
-                    {
-                        var gameId = dataReader.GetInt32(dataReader.GetOrdinal("gameId"));
-                        var name = dataReader.GetString(dataReader.GetOrdinal("name"));
-                        var homeTeam = dataReader.GetString(dataReader.GetOrdinal("homeTeam"));
-                        var awayTeam = dataReader.GetString(dataReader.GetOrdinal("awayTeam"));
-                        var availableSeats = dataReader.GetInt32(dataReader.GetOrdinal("availableSeats"));
-                        var seatCost = dataReader.GetInt32(dataReader.GetOrdinal("seatCost"));
-
-                        var game = new Game(gameId, name, homeTeam, awayTeam, availableSeats, seatCost);
-                        games.Add(game);
-                    }
+                    while (dataReader.Read()) games.Add(GetGameFromDataReader(dataReader));
                 }
             }
 
-            Log.InfoFormat("Exiting GetGamesOrderedByAvailableSeats with values {0}", games);
+            Log.InfoFormat("Exiting GetGamesByAvailableSeatsDescending with values {0}", games);
             return games;
+        }
+
+        public Game SetGameAvailableSeats(int id, int availableSeats)
+        {
+            Log.InfoFormat("Entering SetGameAvailableSeats with value {0}", id);
+
+            var game = GetOne(id);
+            var connection = DbUtils.Connection;
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "update games set availableSeats = " + availableSeats + " where gameId = " + id + ";";
+                var result = command.ExecuteNonQuery();
+                if (result == 0)
+                    throw new NotFoundException();
+            }
+
+            Log.InfoFormat("Exiting SetGameAvailableSeats with value {0}", game);
+            return game;
+        }
+
+        private void GetGamesFromDatabase(IDbCommand command, List<Game> games)
+        {
+            using (var dataReader = command.ExecuteReader())
+            {
+                while (dataReader.Read()) games.Add(GetGameFromDataReader(dataReader));
+            }
+        }
+
+        public static Game GetGameFromDataReader(IDataReader dataReader)
+        {
+            var gameId = dataReader.GetInt32(dataReader.GetOrdinal("gameId"));
+            var name = dataReader.GetString(dataReader.GetOrdinal("name"));
+            var homeTeam = dataReader.GetString(dataReader.GetOrdinal("homeTeam"));
+            var awayTeam = dataReader.GetString(dataReader.GetOrdinal("awayTeam"));
+            var availableSeats = dataReader.GetInt32(dataReader.GetOrdinal("availableSeats"));
+            var seatCost = dataReader.GetInt32(dataReader.GetOrdinal("seatCost"));
+
+            return new Game(gameId, name, homeTeam, awayTeam, availableSeats, seatCost);
         }
 
         public override string ToString()
