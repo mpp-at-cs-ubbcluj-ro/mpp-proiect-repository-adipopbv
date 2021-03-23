@@ -2,19 +2,12 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
-  <object class="GtkListStore" id="GamesListStore">
-    <columns>
-      <!-- column-name Name -->
-      <column type="gchararray"/>
-      <!-- column-name HomeTeam -->
-      <column type="gchararray"/>
-      <!-- column-name AwayTeam -->
-      <column type="gchararray"/>
-      <!-- column-name SeatCost -->
-      <column type="gint"/>
-      <!-- column-name AvailableSeats -->
-      <column type="gint"/>
-    </columns>
+  <object class="GtkAdjustment" id="SeatsCountAdjustment">
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="value">1</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
   </object>
   <object class="GtkWindow" id="Window">
     <property name="can-focus">False</property>
@@ -70,51 +63,10 @@
             <property name="height-request">417</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
-            <property name="model">GamesListStore</property>
-            <property name="enable-grid-lines">horizontal</property>
+            <property name="headers-clickable">False</property>
+            <property name="enable-grid-lines">both</property>
             <child internal-child="selection">
               <object class="GtkTreeSelection"/>
-            </child>
-            <child>
-              <object class="GtkTreeViewColumn" id="IdColumn">
-                <property name="title" translatable="yes">Id</property>
-                <property name="expand">True</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkTreeViewColumn" id="NameColumn">
-                <property name="resizable">True</property>
-                <property name="title" translatable="yes">Name</property>
-                <property name="expand">True</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkTreeViewColumn" id="HomeTeamColumn">
-                <property name="resizable">True</property>
-                <property name="title" translatable="yes">Home Team</property>
-                <property name="expand">True</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkTreeViewColumn" id="AwayTeamColumn">
-                <property name="resizable">True</property>
-                <property name="title" translatable="yes">Away Team</property>
-                <property name="expand">True</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkTreeViewColumn" id="SeatCostColumn">
-                <property name="resizable">True</property>
-                <property name="title" translatable="yes">Seat Cost</property>
-                <property name="expand">True</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkTreeViewColumn" id="AvailableSeatsColumn">
-                <property name="resizable">True</property>
-                <property name="title" translatable="yes">Available Seats</property>
-                <property name="expand">True</property>
-              </object>
             </child>
           </object>
           <packing>
@@ -172,11 +124,13 @@
             <property name="height-request">34</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
-            <property name="input-purpose">digits</property>
-            <property name="climb-rate">1</property>
+            <property name="max-length">4</property>
+            <property name="width-chars">4</property>
+            <property name="max-width-chars">4</property>
+            <property name="input-purpose">number</property>
+            <property name="adjustment">SeatsCountAdjustment</property>
             <property name="snap-to-ticks">True</property>
             <property name="numeric">True</property>
-            <property name="update-policy">if-valid</property>
             <property name="value">1</property>
           </object>
           <packing>
@@ -209,7 +163,7 @@ available seats descending</property>
             <property name="can-focus">True</property>
             <property name="receives-default">False</property>
             <property name="draw-indicator">True</property>
-            <signal name="toggled" handler="Update" swapped="no"/>
+            <signal name="toggled" handler="SwitchFilter" swapped="no"/>
           </object>
           <packing>
             <property name="x">576</property>
