@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="355.0" prefWidth="270.0"
+            style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11.0.1"
+            fx:controller="userInterfacing.SignUpController">
+    <GridPane layoutX="22.0" layoutY="124.0" prefHeight="111.0" prefWidth="230.0">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="109.0" minWidth="10.0" prefWidth="84.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="146.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="5.0" prefHeight="10.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="5.0" prefHeight="10.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <TextField fx:id="usernameField" alignment="CENTER" GridPane.columnIndex="1">
+            <font>
+                <Font name="Noto Sans Regular" size="14.0"/>
+            </font>
+        </TextField>
+        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="username">
+            <font>
+                <Font name="Noto Sans Regular" size="14.0"/>
+            </font>
+        </Text>
+        <Text fill="WHITE" layoutX="32.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="password"
+              GridPane.rowIndex="1">
+            <font>
+                <Font name="Noto Sans Regular" size="14.0"/>
+            </font>
+        </Text>
+        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <font>
+                <Font name="Noto Sans Regular" size="14.0"/>
+            </font>
+        </PasswordField>
+    </GridPane>
+    <Separator layoutX="35.0" layoutY="72.0" prefWidth="200.0" AnchorPane.leftAnchor="35.0"
+               AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="80.0"/>
+    <Text fill="WHITE" layoutX="12.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="sign up"
+          textAlignment="CENTER" wrappingWidth="251.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="8.0"
+          AnchorPane.topAnchor="97.75799942016602">
+        <font>
+            <Font name="Noto Sans Regular" size="18.0"/>
+        </font>
+    </Text>
+    <Button fx:id="signUpButton" layoutX="95.0" layoutY="254.0" mnemonicParsing="false" onAction="#signUp"
+            prefHeight="26.0" prefWidth="81.0" text="Accept" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0"
+            AnchorPane.topAnchor="254.0">
+        <font>
+            <Font name="Noto Sans Regular" size="14.0"/>
+        </font>
+    </Button>
+    <Text fill="WHITE" layoutX="22.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Basketball teams!"
+          textAlignment="CENTER" wrappingWidth="230.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="19.0"
+          AnchorPane.topAnchor="23.274999618530273">
+        <font>
+            <Font name="Noto Sans Regular" size="25.0"/>
+        </font>
+    </Text>
+    <Button fx:id="toLogInButton" layoutX="102.0" layoutY="303.0" mnemonicParsing="false" onAction="#toLogIn"
+            prefHeight="25.0" prefWidth="67.0" text="Back">
+        <font>
+            <Font name="Noto Sans Regular" size="14.0"/>
+        </font>
+    </Button>
+</AnchorPane>

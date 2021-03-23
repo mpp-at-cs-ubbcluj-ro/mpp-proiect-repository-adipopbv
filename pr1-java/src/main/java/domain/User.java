@@ -1,8 +1,24 @@
 package domain;
 
-public class User extends Entity<Integer>{
+public class User extends Entity<Integer> {
     private String username;
-    private String status = "logged-out";
+    private String status;
+
+    public User(String username) {
+        this.username = username;
+        this.status = "logged-out";
+    }
+
+    public User(String username, String status) {
+        this.username = username;
+        this.status = status;
+    }
+
+    public User(Integer id, String username, String status) {
+        super(id);
+        this.username = username;
+        this.status = status;
+    }
 
     public String getUsername() {
         return username;
@@ -17,12 +33,6 @@ public class User extends Entity<Integer>{
     }
 
     public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public User(Integer id, String username, String status) {
-        super(id);
-        this.username = username;
         this.status = status;
     }
 

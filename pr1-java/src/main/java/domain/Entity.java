@@ -11,6 +11,10 @@ public abstract class Entity<ID> {
         this.id = id;
     }
 
+    public Entity() {
+
+    }
+
     public Entity(ID id) {
         this.id = id;
     }

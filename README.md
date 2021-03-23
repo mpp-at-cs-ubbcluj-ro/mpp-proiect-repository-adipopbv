@@ -25,7 +25,7 @@ Lista saptamanilor (temele facute se taie cu o linie orizontala):
 
 - ~~saptamana 3~~
 - ~~saptamana 4~~
-- saptamana 5
+- ~~saptamana 5~~
 - saptamana 6
 - saptamana 7
 - saptamana 8

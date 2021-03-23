@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1000.0"
+            style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/11.0.1"
+            fx:controller="userInterfacing.MainController">
+    <Text fx:id="welcomeText" fill="WHITE" layoutX="431.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Welcome user!" AnchorPane.leftAnchor="431.0" AnchorPane.rightAnchor="430.2200012207031"
+          AnchorPane.topAnchor="14.0">
+        <font>
+            <Font name="Noto Sans Regular" size="20.0"/>
+        </font>
+    </Text>
+    <TableView fx:id="gamesTable" layoutX="14.0" layoutY="69.0" prefHeight="515.0" prefWidth="671.0"
+               AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="315.0"
+               AnchorPane.topAnchor="69.0">
+        <columns>
+            <TableColumn fx:id="nameColumn" prefWidth="181.0" text="Game name"/>
+            <TableColumn fx:id="homeTeamColumn" prefWidth="132.0" text="Home team"/>
+            <TableColumn fx:id="awayTeamColumn" prefWidth="139.0" text="Away team"/>
+            <TableColumn fx:id="seatCostColumn" prefWidth="83.0" text="Seat cost"/>
+            <TableColumn fx:id="availableSeatsColumn" prefWidth="135.0" text="Remaining seats"/>
+        </columns>
+    </TableView>
+    <Separator layoutX="15.0" layoutY="41.0" prefHeight="27.0" prefWidth="970.0" AnchorPane.leftAnchor="14.0"
+               AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="40.0"/>
+    <Button fx:id="logOutButton" layoutX="915.0" layoutY="556.0" mnemonicParsing="false" onAction="#logOut"
+            text="Log out" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+        <font>
+            <Font name="Noto Sans Regular" size="14.0"/>
+        </font>
+    </Button>
+    <GridPane alignment="CENTER" layoutX="701.0" layoutY="67.0" prefHeight="89.0" prefWidth="284.0"
+              AnchorPane.leftAnchor="701.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="67.0">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="102.0"/>
+            <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0"
+                               prefWidth="184.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Client name">
+            <font>
+                <Font name="Noto Sans Regular" size="14.0"/>
+            </font>
+        </Text>
+        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Seats count" GridPane.rowIndex="1">
+            <font>
+                <Font name="Noto Sans Regular" size="14.0"/>
+            </font>
+        </Text>
+        <TextField fx:id="clientNameField" prefHeight="30.0" prefWidth="171.0" promptText="name..."
+                   GridPane.columnIndex="1">
+            <font>
+                <Font name="Noto Sans Regular" size="14.0"/>
+            </font>
+        </TextField>
+        <Spinner fx:id="seatsCountSpinner" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <valueFactory>
+                <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" initialValue="1" max="1000" min="1"/>
+            </valueFactory>
+        </Spinner>
+
+    </GridPane>
+    <Button fx:id="sellSeatsButton" layoutX="701.0" layoutY="164.0" mnemonicParsing="false" onAction="#sellSeats"
+            prefHeight="30.0" prefWidth="284.0" text="Sell seats" AnchorPane.rightAnchor="15.0"
+            AnchorPane.topAnchor="164.0">
+        <font>
+            <Font name="Noto Sans Regular" size="14.0"/>
+        </font>
+    </Button>
+    <CheckBox fx:id="switchFilterCheckBox" layoutX="701.0" layoutY="213.0" mnemonicParsing="false" onAction="#update"
+              prefHeight="42.0" prefWidth="284.0" text="Filter games with available seats descending" textFill="WHITE"
+              wrapText="true" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="213.0">
+        <font>
+            <Font name="Noto Sans Regular" size="14.0"/>
+        </font>
+    </CheckBox>
+</AnchorPane>

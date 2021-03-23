@@ -1,8 +1,19 @@
 package domain;
 
-public class Ticket extends Entity<Integer>{
+public class Ticket extends Entity<Integer> {
     private Game forGame;
     private String clientName;
+
+    public Ticket(Game forGame, String clientName) {
+        this.forGame = forGame;
+        this.clientName = clientName;
+    }
+
+    public Ticket(Integer id, Game forGame, String clientName) {
+        super(id);
+        this.forGame = forGame;
+        this.clientName = clientName;
+    }
 
     public Game getForGame() {
         return forGame;
@@ -18,12 +29,6 @@ public class Ticket extends Entity<Integer>{
 
     public void setClientName(String cost) {
         this.clientName = cost;
-    }
-
-    public Ticket(Integer id, Game forGame, String clientName) {
-        super(id);
-        this.forGame = forGame;
-        this.clientName = clientName;
     }
 
     @Override

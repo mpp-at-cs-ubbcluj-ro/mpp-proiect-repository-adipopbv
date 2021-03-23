@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Data;
 using log4net;
+using Mono.Data.Sqlite;
 using pr1_cs.Domain;
 using pr1_cs.Domain.Exceptions;
 
@@ -31,7 +31,8 @@ namespace pr1_cs.Repository.Database
                         var ticketId = dataReader.GetInt32(dataReader.GetOrdinal("ticketId"));
                         var clientName = dataReader.GetString(dataReader.GetOrdinal("clientName"));
 
-                        var ticket = new Ticket(ticketId, getGameFromDataReader(dataReader), clientName);
+                        var ticket = new Ticket(ticketId, GameDbRepository.GetGameFromDataReader(dataReader),
+                            clientName);
                         tickets.Add(ticket);
                     }
                 }
@@ -49,7 +50,9 @@ namespace pr1_cs.Repository.Database
             var connection = DbUtils.Connection;
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "select * from tickets inner join games on games.gameId = tickets.forGameId where ticketId = " + id + ";";
+                command.CommandText =
+                    "select * from tickets inner join games on games.gameId = tickets.forGameId where ticketId = " +
+                    id + ";";
                 using (var dataReader = command.ExecuteReader())
                 {
                     if (dataReader.Read())
@@ -57,7 +60,7 @@ namespace pr1_cs.Repository.Database
                         var ticketId = dataReader.GetInt32(dataReader.GetOrdinal("ticketId"));
                         var clientName = dataReader.GetString(dataReader.GetOrdinal("clientName"));
 
-                        ticket = new Ticket(ticketId, getGameFromDataReader(dataReader), clientName);
+                        ticket = new Ticket(ticketId, GameDbRepository.GetGameFromDataReader(dataReader), clientName);
                     }
                     else
                     {
@@ -78,14 +81,9 @@ namespace pr1_cs.Repository.Database
             using (var command = connection.CreateCommand())
             {
                 command.CommandText =
-                    "insert into tickets(ticketId, forGameId, clientName) values(@ticketId, @forGameId, @clientName);";
+                    "insert into tickets(forGameId, clientName) values(@forGameId, @clientName);";
 
                 var dataParameter = command.CreateParameter();
-                dataParameter.ParameterName = "@ticketId";
-                dataParameter.Value = ticket.Id;
-                command.Parameters.Add(dataParameter);
-
-                dataParameter = command.CreateParameter();
                 dataParameter.ParameterName = "@forGameId";
                 dataParameter.Value = ticket.ForGame.Id;
                 command.Parameters.Add(dataParameter);
@@ -95,9 +93,22 @@ namespace pr1_cs.Repository.Database
                 dataParameter.Value = ticket.ClientName;
                 command.Parameters.Add(dataParameter);
 
-                var result = command.ExecuteNonQuery();
-                if (result == 0)
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (SqliteException exception)
+                {
                     throw new DuplicateException();
+                }
+
+                command.CommandText = "select max(ticketId) as ticketId from tickets;";
+                using (var dataReader = command.ExecuteReader())
+                {
+                    dataReader.Read();
+                    var ticketId = dataReader.GetInt32(dataReader.GetOrdinal("ticketId"));
+                    ticket.Id = ticketId;
+                }
             }
 
             Log.InfoFormat("Exiting getOne with value {0}", ticket);
@@ -141,18 +152,6 @@ namespace pr1_cs.Repository.Database
 
             Log.InfoFormat("Exiting Remove with value {0}", oldTicket);
             return oldTicket;
-        }
-
-        private Game getGameFromDataReader(IDataReader dataReader)
-        {
-            var gameId = dataReader.GetInt32(dataReader.GetOrdinal("gameId"));
-            var name = dataReader.GetString(dataReader.GetOrdinal("name"));
-            var homeTeam = dataReader.GetString(dataReader.GetOrdinal("homeTeam"));
-            var awayTeam = dataReader.GetString(dataReader.GetOrdinal("awayTeam"));
-            var availableSeats = dataReader.GetInt32(dataReader.GetOrdinal("availableSeats"));
-            var seatCost = dataReader.GetInt32(dataReader.GetOrdinal("seatCost"));
-
-            return new Game(gameId, name, homeTeam, awayTeam, availableSeats, seatCost);
         }
 
 

@@ -1,30 +1,55 @@
-repository/Repository.java
- repository.Repository
-repository/UserRepository.java
- repository.UserRepository
-domain/exceptions/DuplicateException.java
- domain.exceptions.DuplicateException
-domain/Entity.java
- domain.Entity
-repository/database/TicketDbRepository.java
- repository.database.TicketDbRepository
 domain/exceptions/NotFoundException.java
  domain.exceptions.NotFoundException
+domain/exceptions/DatabaseException.java
+ domain.exceptions.DatabaseException
+repository/database/DbUtils.java
+ repository.database.DbUtils
+domain/exceptions/DuplicateException.java
+ domain.exceptions.DuplicateException
+domain/exceptions/LogInException.java
+ domain.exceptions.LogInException
+utils/Configuration.java
+ utils.Configuration
 domain/User.java
  domain.User
-repository/database/JdbcUtils.java
- repository.database.JdbcUtils
-domain/Ticket.java
- domain.Ticket
 domain/Game.java
  domain.Game
-repository/TicketRepository.java
- repository.TicketRepository
-repository/GameRepository.java
- repository.GameRepository
+domain/Entity.java
+ domain.Entity
+utils/observers/Observer.java
+ utils.observers.Observer
 Main.java
  Main
-repository/database/GameDbRepository.java
- repository.database.GameDbRepository
+repository/TicketRepository.java
+ repository.TicketRepository
+repository/Repository.java
+ repository.Repository
+utils/observers/Observable.java
+ utils.observers.Observable
+domain/Ticket.java
+ domain.Ticket
+repository/UserRepository.java
+ repository.UserRepository
 repository/database/UserDbRepository.java
  repository.database.UserDbRepository
+domain/exceptions/ParameterException.java
+ domain.exceptions.ParameterException
+services/Service.java
+ services.Service
+repository/GameRepository.java
+ repository.GameRepository
+userInterfacing/UserInterface.java
+ userInterfacing.UserInterface
+repository/database/TicketDbRepository.java
+ repository.database.TicketDbRepository
+userInterfacing/JavaFxClient.java
+ userInterfacing.JavaFxClient
+repository/database/GameDbRepository.java
+ repository.database.GameDbRepository
+userInterfacing/LogInController.java
+ userInterfacing.LogInController
+userInterfacing/SignUpController.java
+ userInterfacing.SignUpController
+userInterfacing/MainController.java
+ userInterfacing.MainController
+ userInterfacing.MainController$1
