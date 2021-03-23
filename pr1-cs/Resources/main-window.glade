@@ -2,6 +2,20 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
+  <object class="GtkListStore" id="GamesListStore">
+    <columns>
+      <!-- column-name Name -->
+      <column type="gchararray"/>
+      <!-- column-name HomeTeam -->
+      <column type="gchararray"/>
+      <!-- column-name AwayTeam -->
+      <column type="gchararray"/>
+      <!-- column-name SeatCost -->
+      <column type="gint"/>
+      <!-- column-name AvailableSeats -->
+      <column type="gint"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="Window">
     <property name="can-focus">False</property>
     <child>
@@ -25,7 +39,7 @@
         </child>
         <child>
           <object class="GtkSeparator">
-            <property name="width-request">809</property>
+            <property name="width-request">849</property>
             <property name="height-request">20</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
@@ -46,8 +60,160 @@
             <signal name="clicked" handler="LogOut" swapped="no"/>
           </object>
           <packing>
-            <property name="x">734</property>
-            <property name="y">464</property>
+            <property name="x">769</property>
+            <property name="y">462</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkTreeView" id="GamesTreeView">
+            <property name="width-request">548</property>
+            <property name="height-request">417</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="model">GamesListStore</property>
+            <property name="enable-grid-lines">horizontal</property>
+            <child internal-child="selection">
+              <object class="GtkTreeSelection"/>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="IdColumn">
+                <property name="title" translatable="yes">Id</property>
+                <property name="expand">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="NameColumn">
+                <property name="resizable">True</property>
+                <property name="title" translatable="yes">Name</property>
+                <property name="expand">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="HomeTeamColumn">
+                <property name="resizable">True</property>
+                <property name="title" translatable="yes">Home Team</property>
+                <property name="expand">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="AwayTeamColumn">
+                <property name="resizable">True</property>
+                <property name="title" translatable="yes">Away Team</property>
+                <property name="expand">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="SeatCostColumn">
+                <property name="resizable">True</property>
+                <property name="title" translatable="yes">Seat Cost</property>
+                <property name="expand">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="AvailableSeatsColumn">
+                <property name="resizable">True</property>
+                <property name="title" translatable="yes">Available Seats</property>
+                <property name="expand">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="x">15</property>
+            <property name="y">78</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="ClientNameLabel">
+            <property name="width-request">107</property>
+            <property name="height-request">26</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Client name</property>
+            <attributes>
+              <attribute name="font-desc" value="Noto Sans 14"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">574</property>
+            <property name="y">78</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="SeatsCountLabel">
+            <property name="width-request">107</property>
+            <property name="height-request">26</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Seats count</property>
+            <attributes>
+              <attribute name="font-desc" value="Noto Sans 14"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">574</property>
+            <property name="y">129</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="ClientNameEntry">
+            <property name="width-request">169</property>
+            <property name="height-request">34</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+          </object>
+          <packing>
+            <property name="x">695</property>
+            <property name="y">75</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="SeatsCountSpinButton">
+            <property name="width-request">169</property>
+            <property name="height-request">34</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="input-purpose">digits</property>
+            <property name="climb-rate">1</property>
+            <property name="snap-to-ticks">True</property>
+            <property name="numeric">True</property>
+            <property name="update-policy">if-valid</property>
+            <property name="value">1</property>
+          </object>
+          <packing>
+            <property name="x">695</property>
+            <property name="y">125</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="SellSeatsButton">
+            <property name="label" translatable="yes">Sell seats</property>
+            <property name="width-request">288</property>
+            <property name="height-request">39</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <signal name="clicked" handler="SellSeats" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">576</property>
+            <property name="y">177</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkCheckButton" id="SwitchFilterCheckButton">
+            <property name="label" translatable="yes">Filter games with 
+available seats descending</property>
+            <property name="width-request">242</property>
+            <property name="height-request">50</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">False</property>
+            <property name="draw-indicator">True</property>
+            <signal name="toggled" handler="Update" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">576</property>
+            <property name="y">233</property>
           </packing>
         </child>
       </object>
