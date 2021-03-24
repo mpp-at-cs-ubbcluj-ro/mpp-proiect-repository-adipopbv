@@ -1,4 +1,4 @@
-package utils;
+package pr1Java.client;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,9 +18,5 @@ public class Configuration {
         } catch (IOException exception) {
             logger.error(exception);
         }
-    }
-
-    public static void initLogger() {
-        logger = LogManager.getLogger();
     }
 }

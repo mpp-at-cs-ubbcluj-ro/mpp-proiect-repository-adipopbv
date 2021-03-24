@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'pr1-java'
+group 'Java11ChatSockets'
 version '1.0'
 
 sourceCompatibility = 1.8

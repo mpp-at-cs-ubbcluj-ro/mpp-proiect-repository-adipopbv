@@ -1,0 +1,30 @@
+pr1Java/networking/rpcProtocol/RequestType.java
+ pr1Java.networking.rpcProtocol.RequestType
+pr1Java/networking/rpcProtocol/Request.java
+ pr1Java.networking.rpcProtocol.Request
+ pr1Java.networking.rpcProtocol.Request$1
+ pr1Java.networking.rpcProtocol.Request$Builder
+pr1Java/networking/rpcProtocol/Response.java
+ pr1Java.networking.rpcProtocol.Response
+ pr1Java.networking.rpcProtocol.Response$1
+ pr1Java.networking.rpcProtocol.Response$Builder
+pr1Java/networking/rpcProtocol/ResponseType.java
+ pr1Java.networking.rpcProtocol.ResponseType
+pr1Java/networking/rpcProtocol/ServicesRpcProxy.java
+ pr1Java.networking.rpcProtocol.ServicesRpcProxy
+ pr1Java.networking.rpcProtocol.ServicesRpcProxy$1
+ pr1Java.networking.rpcProtocol.ServicesRpcProxy$ReaderThread
+pr1Java/networking/dataTransfer/SeatsCountDto.java
+ pr1Java.networking.dataTransfer.SeatsCountDto
+pr1Java/networking/dataTransfer/GameCollectionDto.java
+ pr1Java.networking.dataTransfer.GameCollectionDto
+pr1Java/networking/dataTransfer/GameDto.java
+ pr1Java.networking.dataTransfer.GameDto
+pr1Java/networking/dataTransfer/DtoUtils.java
+ pr1Java.networking.dataTransfer.DtoUtils
+pr1Java/networking/dataTransfer/UsernameDto.java
+ pr1Java.networking.dataTransfer.UsernameDto
+pr1Java/networking/dataTransfer/UserDto.java
+ pr1Java.networking.dataTransfer.UserDto
+pr1Java/networking/rpcProtocol/ClientRpcProxy.java
+ pr1Java.networking.rpcProtocol.ClientRpcProxy
