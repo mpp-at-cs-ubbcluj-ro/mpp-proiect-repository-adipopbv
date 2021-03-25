@@ -16,7 +16,7 @@ public class Configuration {
         try {
             properties.load(new FileReader(configurationFile));
         } catch (IOException exception) {
-            logger.error(exception);
+            logger.error("could not load properties", exception);
         }
     }
 }

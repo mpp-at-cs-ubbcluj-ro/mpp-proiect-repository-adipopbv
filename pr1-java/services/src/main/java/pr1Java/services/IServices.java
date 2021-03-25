@@ -2,7 +2,7 @@ package pr1Java.services;
 
 import pr1Java.model.Game;
 import pr1Java.model.User;
-import pr1Java.model.exceptions.*;
+import pr1Java.model.observers.IObserver;
 
 import java.util.Collection;
 

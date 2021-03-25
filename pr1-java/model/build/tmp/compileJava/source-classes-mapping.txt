@@ -1,3 +1,5 @@
+pr1Java/model/exceptions/ServerException.java
+ pr1Java.model.exceptions.ServerException
 pr1Java/model/exceptions/NotFoundException.java
  pr1Java.model.exceptions.NotFoundException
 pr1Java/model/Game.java
@@ -12,6 +14,8 @@ pr1Java/model/exceptions/ParameterException.java
  pr1Java.model.exceptions.ParameterException
 pr1Java/model/User.java
  pr1Java.model.User
+pr1Java/model/observers/IObserver.java
+ pr1Java.model.observers.IObserver
 pr1Java/model/exceptions/DatabaseException.java
  pr1Java.model.exceptions.DatabaseException
 pr1Java/model/exceptions/DuplicateException.java

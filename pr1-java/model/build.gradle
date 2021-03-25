@@ -2,10 +2,8 @@ plugins {
     id 'java'
 }
 
-group 'Java11ChatSockets'
+group 'pr1-java'
 version '1.0'
-
-sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()

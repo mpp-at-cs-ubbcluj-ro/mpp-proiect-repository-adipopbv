@@ -3,8 +3,9 @@ package pr1Java.networking.rpcProtocol;
 import pr1Java.model.Game;
 import pr1Java.model.User;
 import pr1Java.model.exceptions.NetworkingException;
+import pr1Java.networking.Configuration;
 import pr1Java.networking.dataTransfer.*;
-import pr1Java.services.IObserver;
+import pr1Java.model.observers.IObserver;
 import pr1Java.services.IServices;
 
 import java.io.IOException;
@@ -45,6 +46,7 @@ public class ServicesRpcProxy implements IServices {
             finished = false;
             Thread thread = new Thread(new ReaderThread());
             thread.start();
+            Configuration.logger.trace("ensured connection {} {} {}", connection, input, output);
         } catch (IOException exception) {
             throw new NetworkingException("could not ensure connection");
         }
@@ -57,6 +59,7 @@ public class ServicesRpcProxy implements IServices {
             output.close();
             connection.close();
             client = null;
+            Configuration.logger.trace("closed connection");
         } catch (IOException exception) {
             throw new NetworkingException("could not close connection");
         }
@@ -68,15 +71,18 @@ public class ServicesRpcProxy implements IServices {
         try {
             output.writeObject(request);
             output.flush();
+            Configuration.logger.trace("sent request {}", request);
         } catch (IOException exception) {
             throw new NetworkingException("error sending object " + exception);
         }
     }
 
     private Response readResponse() throws NetworkingException {
+        ensureConnection();
         Response response = null;
         try {
             response = responses.take();
+            Configuration.logger.trace("taken response {} for reading", response);
         } catch (InterruptedException exception) {
             throw new NetworkingException("error reading object " + exception);
         }
@@ -85,6 +91,8 @@ public class ServicesRpcProxy implements IServices {
 
     @Override
     public User signInUser(String username, String password, IObserver client) throws Exception {
+        Configuration.logger.traceEntry("entering with {} {} {}", username, password, client);
+
         User user = new User(username, password);
         UserDto userDto = DtoUtils.toDto(user);
 
@@ -95,6 +103,8 @@ public class ServicesRpcProxy implements IServices {
         if (response.getType() == ResponseType.OK) {
             this.client = client;
             user = DtoUtils.toUser((UserDto) response.getData());
+
+            Configuration.logger.traceExit(user);
             return user;
         } else if (response.getType() == ResponseType.ERROR) {
             throw new Exception(response.getData().toString());
@@ -105,6 +115,8 @@ public class ServicesRpcProxy implements IServices {
 
     @Override
     public void signOutUser(String username, IObserver client) throws Exception {
+        Configuration.logger.traceEntry("entering with {} {}", username, client);
+
         UsernameDto usernameDto = DtoUtils.toDto(username);
 
         Request request = new Request.Builder().setType(RequestType.SIGN_OUT).setData(usernameDto).build();
@@ -115,10 +127,14 @@ public class ServicesRpcProxy implements IServices {
         if (response.getType() == ResponseType.ERROR) {
             throw new Exception(response.getData().toString());
         }
+
+        Configuration.logger.traceExit();
     }
 
     @Override
     public User signUpUser(String username, String password, IObserver client) throws Exception {
+        Configuration.logger.traceEntry("entering with {} {} {}", username, password, client);
+
         User user = new User(username, password);
         UserDto userDto = DtoUtils.toDto(user);
 
@@ -129,6 +145,8 @@ public class ServicesRpcProxy implements IServices {
         if (response.getType() == ResponseType.OK) {
             this.client = client;
             user = DtoUtils.toUser((UserDto) response.getData());
+
+            Configuration.logger.traceExit(user);
             return user;
         } else if (response.getType() == ResponseType.ERROR) {
             throw new Exception(response.getData().toString());
@@ -139,12 +157,17 @@ public class ServicesRpcProxy implements IServices {
 
     @Override
     public Collection<Game> getAllGames() throws Exception {
+        Configuration.logger.traceEntry();
+
         Request request = new Request.Builder().setType(RequestType.GET_ALL_GAMES).build();
         sendRequest(request);
 
         Response response = readResponse();
         if (response.getType() == ResponseType.OK) {
-            return DtoUtils.toGameCollection((GameCollectionDto) response.getData());
+            Collection<Game> games = DtoUtils.toGameCollection((GameCollectionDto) response.getData());
+
+            Configuration.logger.traceExit(games);
+            return games;
         } else if (response.getType() == ResponseType.ERROR) {
             throw new Exception(response.getData().toString());
         } else {
@@ -154,25 +177,34 @@ public class ServicesRpcProxy implements IServices {
 
     @Override
     public void sellSeats(Game game, String clientName, Integer seatsCount) throws Exception {
-        SeatsCountDto seatsCountDto = DtoUtils.toDto(seatsCount);
+        Configuration.logger.traceEntry("entering with {} {} {}", game, clientName, seatsCount);
 
-        Request request = new Request.Builder().setType(RequestType.SELL_SEATS).setData(seatsCountDto).build();
+        SeatsSellingDto seatsSellingDto = DtoUtils.toDto(game, clientName, seatsCount);
+
+        Request request = new Request.Builder().setType(RequestType.SELL_SEATS).setData(seatsSellingDto).build();
         sendRequest(request);
 
         Response response = readResponse();
         if (response.getType() == ResponseType.ERROR) {
             throw new Exception(response.getData().toString());
         }
+
+        Configuration.logger.traceExit();
     }
 
     @Override
     public Collection<Game> getGamesWithAvailableSeatsDescending() throws Exception {
+        Configuration.logger.traceEntry();
+
         Request request = new Request.Builder().setType(RequestType.GET_GAMES_WITH_AVAILABLE_SEATS_DESCENDING).build();
         sendRequest(request);
 
         Response response = readResponse();
         if (response.getType() == ResponseType.OK) {
-            return DtoUtils.toGameCollection((GameCollectionDto) response.getData());
+            Collection<Game> games = DtoUtils.toGameCollection((GameCollectionDto) response.getData());
+
+            Configuration.logger.traceExit(games);
+            return games;
         } else if (response.getType() == ResponseType.ERROR) {
             throw new Exception(response.getData().toString());
         } else {
@@ -181,9 +213,13 @@ public class ServicesRpcProxy implements IServices {
     }
 
     private void handleResponse(Response response) throws Exception {
+        Configuration.logger.traceEntry("entering with {}", response);
+
         if (response.getType() == ResponseType.OK ||
                 response.getType() == ResponseType.ERROR) {
             responses.put(response);
+
+            Configuration.logger.traceExit();
             return;
         }
 
@@ -191,14 +227,20 @@ public class ServicesRpcProxy implements IServices {
         try {
             Method method = this.getClass().getDeclaredMethod(handlerName, Response.class);
             method.invoke(this, response);
+
+            Configuration.logger.traceExit();
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException exception) {
             throw new NetworkingException("unknown response");
         }
     }
 
     private void handleSEATS_SOLD(Response response) {
-        Game game = DtoUtils.toGame((GameDto) response.getData());
-        client.seatsSold(game);
+        Configuration.logger.traceEntry("entering with {}", response);
+
+        SeatsSoldDto seatsSoldDto = (SeatsSoldDto) response.getData();
+        client.seatsSold(seatsSoldDto.getGameId(), seatsSoldDto.getSeatsCount());
+
+        Configuration.logger.traceExit();
     }
 
 //    private boolean isUpdate(Response response) {
@@ -215,9 +257,16 @@ public class ServicesRpcProxy implements IServices {
     private class ReaderThread implements Runnable {
 
         public void run() {
+            Configuration.logger.traceEntry();
+
             while (!finished) {
                 try {
-                    handleResponse((Response) input.readObject());
+                    ensureConnection();
+                    Configuration.logger.trace("waiting response");
+                    Response response = (Response) input.readObject();
+                    Configuration.logger.trace("response received {}", response);
+                    handleResponse(response);
+                    Configuration.logger.trace("response handled {}", response);
 //                    Object response = input.readObject();
 //                    if (isUpdate((Response) response)) {
 //                        handleUpdate((Response) response);
@@ -225,9 +274,11 @@ public class ServicesRpcProxy implements IServices {
 //                        responses.put((Response) response);
 //                    }
                 } catch (Exception exception) {
-                    exception.printStackTrace();
+                    Configuration.logger.error(exception);
                 }
             }
+
+            Configuration.logger.traceExit();
         }
     }
 }

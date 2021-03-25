@@ -1,15 +1,15 @@
-pr1Java/client/controllers/SignInController.java
- pr1Java.client.controllers.SignInController
-pr1Java/client/controllers/SignUpController.java
- pr1Java.client.controllers.SignUpController
-pr1Java/client/controllers/MainController.java
- pr1Java.client.controllers.MainController
- pr1Java.client.controllers.MainController$1
+pr1Java/client/clients/SignUpClient.java
+ pr1Java.client.clients.SignUpClient
+pr1Java/client/clients/MainClient.java
+ pr1Java.client.clients.MainClient
+ pr1Java.client.clients.MainClient$1
 pr1Java/client/Configuration.java
  pr1Java.client.Configuration
-pr1Java/client/controllers/Controller.java
- pr1Java.client.controllers.Controller
-pr1Java/client/JavaFxClient.java
- pr1Java.client.JavaFxClient
-pr1Java/client/Main.java
- pr1Java.client.Main
+pr1Java/client/clients/Client.java
+ pr1Java.client.clients.Client
+pr1Java/client/clients/SignInClient.java
+ pr1Java.client.clients.SignInClient
+pr1Java/client/ClientMain.java
+ pr1Java.client.ClientMain
+pr1Java/client/JavaFxRpcClientStarter.java
+ pr1Java.client.JavaFxRpcClientStarter
