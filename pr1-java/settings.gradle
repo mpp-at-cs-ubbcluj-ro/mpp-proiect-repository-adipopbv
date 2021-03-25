@@ -1,2 +1,8 @@
 rootProject.name = 'pr1-java'
+include 'client'
+include 'model'
+include 'server'
+include 'networking'
+include 'services'
+include 'persistence'
 
