@@ -1,4 +1,4 @@
-namespace Persistence
+namespace Services
 {
     public class Program
     {

@@ -1,4 +1,4 @@
-namespace Persistence
+namespace Networking
 {
     public class Program
     {

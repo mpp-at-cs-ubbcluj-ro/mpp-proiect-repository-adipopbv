@@ -8,16 +8,16 @@ namespace Client
 {
     public class GtkClientStarter
     {
-        private readonly string _defaultHost = "localhost";
-        private readonly string _defaultPort = "55555";
+        private const string DefaultHost = "127.0.0.1";
+        private const string DefaultPort = "55555";
 
         public static int OpenWindows = 0;
         
         public void Run(string[] args)
         {
             Application.Init();
-            IServices services = new ServicesProxy(ConfigurationManager.AppSettings["serverHost"] ?? _defaultHost,
-                int.Parse(ConfigurationManager.AppSettings["serverPost"] ?? _defaultPort));
+            IServices services = new RpcServicesProxy(ConfigurationManager.AppSettings["serverHost"] ?? DefaultHost,
+                int.Parse(ConfigurationManager.AppSettings["serverPost"] ?? DefaultPort));
             new SignInClient().Init(services, null).Open();
             Application.Run();
         }

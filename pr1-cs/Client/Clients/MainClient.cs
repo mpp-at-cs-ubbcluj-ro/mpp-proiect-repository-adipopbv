@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using Gtk;
 using Model;
@@ -10,9 +11,15 @@ namespace Client.Clients
 {
     public class MainClient : Client, IObserver
     {
-        private readonly ListStore _gamesModel = new ListStore(typeof(string), typeof(string), typeof(string),
+        private readonly ListStore _gamesModel = new(
             typeof(string),
-            typeof(string), typeof(Game));
+            typeof(string),
+            typeof(string),
+            typeof(string),
+            typeof(string),
+            typeof(Game));
+
+        private Collection<Game> _games;
 
         private TreeView _gamesTreeView;
         private bool _switchFilter;
@@ -26,7 +33,7 @@ namespace Client.Clients
             OwnedWindow.DeleteEvent += delegate { Close(); };
 
             _gamesTreeView = (TreeView) GuiElements.GetObject("GamesTreeView");
-            Update();
+            LoadGameTableData();
             _gamesTreeView.Model = _gamesModel;
 
             _gamesTreeView.AppendColumn("Name", new CellRendererText(), "text", 0);
@@ -36,6 +43,16 @@ namespace Client.Clients
             _gamesTreeView.AppendColumn("Available seats", new CellRendererText(), "text", 4);
 
             return this;
+        }
+
+        private void LoadGameTableData()
+        {
+            _gamesModel.Clear();
+            foreach (var game in _switchFilter
+                ? Services.GetGamesWithAvailableSeatsDescending()
+                : Services.GetAllGames())
+                _gamesModel.AppendValues(game.Name, game.HomeTeam, game.AwayTeam, game.SeatCost.ToString(),
+                    game.AvailableSeats <= 0 ? "SOLD OUT" : game.AvailableSeats.ToString(), game);
         }
 
         public void SellSeats(object sender, EventArgs args)
@@ -69,16 +86,16 @@ namespace Client.Clients
                 dialog.Destroy();
             }
 
-            Update();
+            LoadGameTableData();
         }
 
         public void SwitchFilter(object sender, EventArgs args)
         {
             _switchFilter = !_switchFilter;
-            Update();
+            LoadGameTableData();
         }
 
-        public void LogOut(object sender, EventArgs args)
+        public void SignOut(object sender, EventArgs args)
         {
             try
             {
@@ -100,19 +117,16 @@ namespace Client.Clients
             }
         }
 
-        public void Update()
-        {
-            _gamesModel.Clear();
-            foreach (var game in _switchFilter ? Services.GetGamesWithAvailableSeatsDescending() : Services.GetAllGames())
-                _gamesModel.AppendValues(game.Name, game.HomeTeam, game.AwayTeam, game.SeatCost.ToString(),
-                    game.AvailableSeats <= 0 ? "SOLD OUT" : game.AvailableSeats.ToString(), game);
-        }
-
         public void SeatsSold(int gameId, int seatsCount)
         {
-            // foreach (var game in _gamesModel.)
-                // _gamesModel.AppendValues(game.Name, game.HomeTeam, game.AwayTeam, game.SeatCost.ToString(),
-                    // game.AvailableSeats <= 0 ? "SOLD OUT" : game.AvailableSeats.ToString(), game);
+            // foreach (var game in _games)
+                // if (game.Id == gameId)
+                // {
+                    // game.AvailableSeats -= seatsCount;
+                    // break;
+                // }
+            // _gamesModel.
+            LoadGameTableData();
         }
     }
 }

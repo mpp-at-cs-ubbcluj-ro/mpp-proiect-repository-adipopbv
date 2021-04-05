@@ -1,4 +1,4 @@
-namespace Persistence
+namespace Model
 {
     public class Program
     {
