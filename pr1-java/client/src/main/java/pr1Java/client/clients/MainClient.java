@@ -14,6 +14,7 @@ import pr1Java.model.exceptions.NotFoundException;
 import pr1Java.model.observers.IObserver;
 import pr1Java.services.IServices;
 
+import java.rmi.RemoteException;
 import java.util.Collection;
 
 public class MainClient extends Client implements IObserver {
@@ -39,6 +40,9 @@ public class MainClient extends Client implements IObserver {
     public CheckBox switchFilterCheckBox;
     ObservableList<Game> gameObservableList = FXCollections.observableArrayList();
     Collection<Game> games;
+
+    public MainClient() throws RemoteException {
+    }
 
     @Override
     public void init(IServices services, User signedInUser) {

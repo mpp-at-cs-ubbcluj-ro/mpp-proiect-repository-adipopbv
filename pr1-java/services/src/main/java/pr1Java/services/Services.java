@@ -11,6 +11,7 @@ import pr1Java.persistence.GameRepository;
 import pr1Java.persistence.TicketRepository;
 import pr1Java.persistence.UserRepository;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -113,7 +114,11 @@ public class Services implements IServices {
         ExecutorService executor = Executors.newFixedThreadPool(defaultThreadsCount);
         for (IObserver client : signedInClients.values()) {
             executor.execute(() -> {
-                client.seatsSold(gameId, seatsCount);
+                try {
+                    client.seatsSold(gameId, seatsCount);
+                } catch (RemoteException e) {
+                    Configuration.logger.error("unable to notify seats sold", e);
+                }
             });
         }
         executor.shutdown();

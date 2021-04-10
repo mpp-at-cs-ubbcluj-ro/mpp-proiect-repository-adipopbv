@@ -1,6 +1,9 @@
 package pr1Java.model.observers;
 
-public interface IObserver {
-    void seatsSold(Integer gameId, Integer seatsCount);
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface IObserver extends Remote {
+    void seatsSold(Integer gameId, Integer seatsCount) throws RemoteException;
 }
 
