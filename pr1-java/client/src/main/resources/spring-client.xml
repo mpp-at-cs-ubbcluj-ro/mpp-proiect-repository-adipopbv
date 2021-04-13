@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="services" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
-        <property name="serviceUrl" value="rmi://192.168.1.113:1099/pr1Java"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:1099/pr1Java"/>
         <property name="serviceInterface" value="pr1Java.services.IServices"/>
     </bean>
 </beans>

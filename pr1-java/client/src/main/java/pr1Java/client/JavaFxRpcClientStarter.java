@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pr1Java.client.clients.SignInClient;
-import pr1Java.networking.rpcProtocol.ServicesRpcProxy;
 import pr1Java.services.IServices;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
