@@ -6,13 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pr1Java.client.clients.SignInClient;
-import pr1Java.networking.rpcProtocol.ServicesRpcProxy;
 import pr1Java.services.IServices;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class JavaFxRpcClientStarter extends Application {
-
-    private static final int defaultPort = 55555;
-    private static final String defaultServer = "localhost";
 
     public static void main(String[] args) {
         launch(args);
@@ -23,20 +21,10 @@ public class JavaFxRpcClientStarter extends Application {
         Configuration.logger.traceEntry();
 
         Configuration.loadProperties("./client/client.config");
+        ApplicationContext factory = new ClassPathXmlApplicationContext("classpath:spring-client.xml");
 
-        String serverIp = Configuration.properties.getProperty("server.host", defaultServer);
-        Integer serverPort = defaultPort;
-        try {
-            serverPort = Integer.parseInt(Configuration.properties.getProperty("server.port"));
-        } catch (NumberFormatException exception) {
-            Configuration.logger.error("wrong port number {}", exception.getMessage());
-            Configuration.logger.warn("using default port {}", defaultPort);
-        }
-        Configuration.logger.info("using server ip " + serverIp);
-        Configuration.logger.info("using server port " + serverPort);
-
-        IServices services = new ServicesRpcProxy(serverIp, serverPort);
-        Configuration.logger.trace("created {} instance", services);
+        IServices services = (IServices) factory.getBean("services");
+        Configuration.logger.trace("connected to {} instance", services);
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/views/signInWindow.fxml"));

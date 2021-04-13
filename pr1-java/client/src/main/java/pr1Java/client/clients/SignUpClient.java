@@ -11,11 +11,16 @@ import javafx.stage.Stage;
 import pr1Java.client.Configuration;
 import pr1Java.model.User;
 
+import java.rmi.RemoteException;
+
 public class SignUpClient extends Client {
     @FXML
     public TextField usernameField;
     @FXML
     public PasswordField passwordField;
+
+    public SignUpClient() throws RemoteException {
+    }
 
     @FXML
     public void signUp() {

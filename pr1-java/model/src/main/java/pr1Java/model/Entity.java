@@ -1,6 +1,8 @@
 package pr1Java.model;
 
-public abstract class Entity<ID> {
+import java.io.Serializable;
+
+public abstract class Entity<ID> implements Serializable {
 
     private ID id;
 
