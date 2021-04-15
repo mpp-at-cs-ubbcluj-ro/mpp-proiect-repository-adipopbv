@@ -1,23 +1,7 @@
-pr1Java/networking/thrift/datatransfer/UserDto.java
- pr1Java.networking.thrift.datatransfer.UserDto
- pr1Java.networking.thrift.datatransfer.UserDto$1
- pr1Java.networking.thrift.datatransfer.UserDto$UserDtoStandardScheme
- pr1Java.networking.thrift.datatransfer.UserDto$UserDtoStandardSchemeFactory
- pr1Java.networking.thrift.datatransfer.UserDto$UserDtoTupleScheme
- pr1Java.networking.thrift.datatransfer.UserDto$UserDtoTupleSchemeFactory
- pr1Java.networking.thrift.datatransfer.UserDto$_Fields
 pr1Java/networking/reflection/datatransfer/DtoUtils.java
  pr1Java.networking.reflection.datatransfer.DtoUtils
 pr1Java/networking/reflection/ResponseType.java
  pr1Java.networking.reflection.ResponseType
-pr1Java/networking/thrift/datatransfer/GameDto.java
- pr1Java.networking.thrift.datatransfer.GameDto
- pr1Java.networking.thrift.datatransfer.GameDto$1
- pr1Java.networking.thrift.datatransfer.GameDto$GameDtoStandardScheme
- pr1Java.networking.thrift.datatransfer.GameDto$GameDtoStandardSchemeFactory
- pr1Java.networking.thrift.datatransfer.GameDto$GameDtoTupleScheme
- pr1Java.networking.thrift.datatransfer.GameDto$GameDtoTupleSchemeFactory
- pr1Java.networking.thrift.datatransfer.GameDto$_Fields
 pr1Java/networking/reflection/datatransfer/UserDto.java
  pr1Java.networking.reflection.datatransfer.UserDto
 pr1Java/networking/reflection/datatransfer/GameCollectionDto.java
@@ -41,8 +25,6 @@ pr1Java/networking/reflection/datatransfer/UsernameDto.java
 pr1Java/networking/reflection/ServicesRpcProxy.java
  pr1Java.networking.reflection.ServicesRpcProxy
  pr1Java.networking.reflection.ServicesRpcProxy$ReaderThread
-pr1Java/networking/thrift/datatransfer/DtoUtils.java
- pr1Java.networking.thrift.datatransfer.DtoUtils
 pr1Java/networking/reflection/datatransfer/GameDto.java
  pr1Java.networking.reflection.datatransfer.GameDto
 pr1Java/networking/reflection/ReflectionClientProxy.java

@@ -9,7 +9,7 @@ namespace Client.Gtk.Reflection.Clients
 {
     public class SignInWindow : Window
     {
-        public override Window Init(IReflectionServices services, User signedInUser)
+        public override Window Init(IServices services, User signedInUser)
         {
             base.Init(services, signedInUser);
 

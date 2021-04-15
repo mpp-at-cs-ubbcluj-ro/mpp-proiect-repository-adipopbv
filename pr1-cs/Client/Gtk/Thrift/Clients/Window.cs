@@ -10,12 +10,12 @@ namespace Client.Gtk.Thrift.Clients
     public abstract class Window
     {
         protected TTransport Connection;
-        protected ThriftServices.Client Services;
+        protected Services.Thrift.Services.Client Services;
         protected readonly Builder GuiElements = new Builder();
         protected User SignedInUser;
         protected global::Gtk.Window OwnedWindow;
 
-        public virtual Window Init(TTransport connection, ThriftServices.Client services, User signedInUser)
+        public virtual Window Init(TTransport connection, Services.Thrift.Services.Client services, User signedInUser)
         {
             ClientStarter.OpenWindows++;
             Connection = connection;

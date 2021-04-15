@@ -3,6 +3,8 @@ using System.Linq;
 using Model;
 using Model.Exceptions;
 using Mono.Data.Sqlite;
+using DuplicateException = Model.Exceptions.Thrift.DuplicateException;
+using NotFoundException = Model.Exceptions.Thrift.NotFoundException;
 
 namespace Persistence.Database
 {

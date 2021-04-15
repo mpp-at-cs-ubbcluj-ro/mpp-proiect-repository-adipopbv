@@ -1,14 +1,14 @@
-pr1Java/server/servers/ConcurrentServer.java
- pr1Java.server.servers.ConcurrentServer
 pr1Java/server/Configuration.java
  pr1Java.server.Configuration
-pr1Java/server/servers/Server.java
- pr1Java.server.servers.Server
-pr1Java/server/servers/reflection/ReflectionConcurrentServer.java
- pr1Java.server.servers.reflection.ReflectionConcurrentServer
-pr1Java/server/ReflectionServerStarter.java
- pr1Java.server.ReflectionServerStarter
+pr1Java/server/reflection/ReflectionConcurrentServer.java
+ pr1Java.server.reflection.ReflectionConcurrentServer
+pr1Java/server/Server.java
+ pr1Java.server.Server
+pr1Java/server/ConcurrentServer.java
+ pr1Java.server.ConcurrentServer
+pr1Java/server/reflection/ServerStarter.java
+ pr1Java.server.reflection.ServerStarter
 pr1Java/server/ServerMain.java
  pr1Java.server.ServerMain
-pr1Java/server/ThriftServerStarter.java
- pr1Java.server.ThriftServerStarter
+pr1Java/server/thrift/ServerStarter.java
+ pr1Java.server.thrift.ServerStarter

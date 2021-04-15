@@ -28,7 +28,7 @@ namespace Client.Gtk.Thrift.Clients
             LoadGameTableData();
         }
 
-        public override Window Init(TTransport connection, ThriftServices.Client services, User signedInUser)
+        public override Window Init(TTransport connection, Services.Thrift.Services.Client services, User signedInUser)
         {
             base.Init(connection, services, signedInUser);
             GuiElements.AddFromFile(ConfigurationManager.AppSettings["mainWindow"]);
@@ -69,8 +69,8 @@ namespace Client.Gtk.Thrift.Clients
 
                 var clientName = ((Entry) GuiElements.GetObject("ClientNameEntry")).Text;
                 var seatsCount = (int) ((SpinButton) GuiElements.GetObject("SeatsCountSpinButton")).Value;
-                var game = (Game) model.GetValue(iter, 5);
-                await Services.sellSeats(DtoUtils.ToDto(game), clientName, seatsCount);
+                var gameDto = (GameDto) model.GetValue(iter, 5);
+                await Services.sellSeats(gameDto, clientName, seatsCount);
 
                 ((Entry) GuiElements.GetObject("ClientNameEntry")).Text = "";
                 ((SpinButton) GuiElements.GetObject("SeatsCountSpinButton")).Value = 1;

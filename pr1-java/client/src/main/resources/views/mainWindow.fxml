@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1000.0"
             style="-fx-background-color: #1E1F29;" xmlns="http://javafx.com/javafx/11.0.1"
-            fx:controller="pr1Java.client.clients.MainClient">
+            fx:controller="pr1Java.client.javafx.reflection.clients.MainWindow">
     <Text fx:id="welcomeText" fill="WHITE" layoutX="431.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0"
           text="Welcome user!" AnchorPane.leftAnchor="431.0" AnchorPane.rightAnchor="430.2200012207031"
           AnchorPane.topAnchor="14.0">

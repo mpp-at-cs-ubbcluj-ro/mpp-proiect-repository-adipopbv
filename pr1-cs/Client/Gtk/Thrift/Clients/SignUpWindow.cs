@@ -10,7 +10,7 @@ namespace Client.Gtk.Thrift.Clients
 {
     public class SignUpWindow : Window
     {
-        public override Window Init(TTransport connection, ThriftServices.Client services, User signedInUser)
+        public override Window Init(TTransport connection, Services.Thrift.Services.Client services, User signedInUser)
         {
             base.Init(connection, services, signedInUser);
 

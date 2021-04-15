@@ -23,7 +23,7 @@ namespace Client.Gtk.Thrift
             TTransport connection = new TSocketTransport(IPAddress.Parse(ConfigurationManager.AppSettings["serverHost"] ?? DefaultHost),
                 int.Parse(ConfigurationManager.AppSettings["serverPost"] ?? DefaultPort), new TConfiguration());
             connection.OpenAsync();
-            var services = new ThriftServices.Client(new TBinaryProtocol(connection));
+            var services = new Services.Thrift.Services.Client(new TBinaryProtocol(connection));
             
             new SignInWindow().Init(connection, services, null).Open();
             Application.Run();

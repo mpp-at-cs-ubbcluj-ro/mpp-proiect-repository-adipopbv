@@ -10,8 +10,8 @@ pr1Java/services/thrift/datatransfer/UserDto.java
  pr1Java.services.thrift.datatransfer.UserDto$_Fields
 pr1Java/services/Configuration.java
  pr1Java.services.Configuration
-pr1Java/services/thrift/ThriftHandler.java
- pr1Java.services.thrift.ThriftHandler
+pr1Java/services/reflection/ReflectionHandler.java
+ pr1Java.services.reflection.ReflectionHandler
 pr1Java/services/thrift/ThriftServices.java
  pr1Java.services.thrift.ThriftServices
  pr1Java.services.thrift.ThriftServices$1
@@ -123,5 +123,5 @@ pr1Java/services/thrift/datatransfer/GameDto.java
  pr1Java.services.thrift.datatransfer.GameDto$GameDtoTupleScheme
  pr1Java.services.thrift.datatransfer.GameDto$GameDtoTupleSchemeFactory
  pr1Java.services.thrift.datatransfer.GameDto$_Fields
-pr1Java/services/reflection/ReflectionHandler.java
- pr1Java.services.reflection.ReflectionHandler
+pr1Java/services/thrift/ThriftHandler.java
+ pr1Java.services.thrift.ThriftHandler

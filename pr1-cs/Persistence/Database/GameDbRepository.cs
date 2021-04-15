@@ -3,6 +3,8 @@ using System.Data;
 using System.Linq;
 using Model;
 using Model.Exceptions;
+using DuplicateException = Model.Exceptions.Thrift.DuplicateException;
+using NotFoundException = Model.Exceptions.Thrift.NotFoundException;
 
 namespace Persistence.Database
 {

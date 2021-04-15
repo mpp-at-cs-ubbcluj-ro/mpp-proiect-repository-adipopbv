@@ -1,15 +1,26 @@
-pr1Java/client/clients/SignUpClient.java
- pr1Java.client.clients.SignUpClient
-pr1Java/client/clients/MainClient.java
- pr1Java.client.clients.MainClient
- pr1Java.client.clients.MainClient$1
+pr1Java/client/javafx/reflection/clients/MainWindow.java
+ pr1Java.client.javafx.reflection.clients.MainWindow
+ pr1Java.client.javafx.reflection.clients.MainWindow$1
+pr1Java/client/javafx/reflection/clients/SignInWindow.java
+ pr1Java.client.javafx.reflection.clients.SignInWindow
 pr1Java/client/Configuration.java
  pr1Java.client.Configuration
-pr1Java/client/clients/Client.java
- pr1Java.client.clients.Client
-pr1Java/client/clients/SignInClient.java
- pr1Java.client.clients.SignInClient
+pr1Java/client/javafx/reflection/ClientStarter.java
+ pr1Java.client.javafx.reflection.ClientStarter
+pr1Java/client/javafx/thrift/clients/Window.java
+ pr1Java.client.javafx.thrift.clients.Window
+pr1Java/client/javafx/reflection/clients/SignUpWindow.java
+ pr1Java.client.javafx.reflection.clients.SignUpWindow
+pr1Java/client/javafx/reflection/clients/Window.java
+ pr1Java.client.javafx.reflection.clients.Window
+pr1Java/client/javafx/thrift/clients/MainWindow.java
+ pr1Java.client.javafx.thrift.clients.MainWindow
+ pr1Java.client.javafx.thrift.clients.MainWindow$1
+pr1Java/client/javafx/thrift/clients/SignUpWindow.java
+ pr1Java.client.javafx.thrift.clients.SignUpWindow
+pr1Java/client/javafx/thrift/ClientStarter.java
+ pr1Java.client.javafx.thrift.ClientStarter
 pr1Java/client/ClientMain.java
  pr1Java.client.ClientMain
-pr1Java/client/JavaFxRpcClientStarter.java
- pr1Java.client.JavaFxRpcClientStarter
+pr1Java/client/javafx/thrift/clients/SignInWindow.java
+ pr1Java.client.javafx.thrift.clients.SignInWindow

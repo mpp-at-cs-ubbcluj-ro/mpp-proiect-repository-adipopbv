@@ -8,11 +8,11 @@ namespace Client.Gtk.Reflection.Clients
     public abstract class Window
     {
         protected readonly Builder GuiElements = new Builder();
-        protected IReflectionServices Services;
+        protected IServices Services;
         protected User SignedInUser;
         protected global::Gtk.Window OwnedWindow;
 
-        public virtual Window Init(IReflectionServices services, User signedInUser)
+        public virtual Window Init(IServices services, User signedInUser)
         {
             ClientStarter.OpenWindows++;
             Services = services;

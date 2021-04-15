@@ -4,8 +4,7 @@ import org.apache.thrift.TException;
 import pr1Java.model.Game;
 import pr1Java.model.Ticket;
 import pr1Java.model.User;
-import pr1Java.model.exceptions.DuplicateException;
-import pr1Java.model.exceptions.NotFoundException;
+import pr1Java.model.exceptions.thrift.*;
 import pr1Java.services.thrift.datatransfer.DtoUtils;
 import pr1Java.services.thrift.datatransfer.GameDto;
 import pr1Java.services.thrift.datatransfer.UserDto;
@@ -39,15 +38,15 @@ public class ThriftHandler implements ThriftServices.Iface {
         Configuration.logger.traceEntry("entering with {} {}", username, password);
 
         if (signedInUsernames.contains(username))
-            throw new TException("user already signed in");
+            throw new SignInException("user already signed in");
         User user = null;
         try {
             user = userRepository.getOne(username);
-        } catch (NotFoundException e) {
-            throw new TException(e.getMessage());
+        } catch (pr1Java.model.exceptions.NotFoundException e) {
+            throw new NotFoundException(e.getMessage());
         }
         if (!user.getPassword().equals(password))
-            throw new TException("incorrect password");
+            throw new SignInException("incorrect password");
         signedInUsernames.add(user.getUsername());
         Configuration.logger.trace("user {} signed in", user);
 
@@ -60,12 +59,12 @@ public class ThriftHandler implements ThriftServices.Iface {
         Configuration.logger.traceEntry("entering with {}", username);
 
         if (!signedInUsernames.contains(username))
-            throw new TException("user already signed out");
+            throw new SignInException("user already signed out");
         User user = null;
         try {
             user = userRepository.getOne(username);
-        } catch (NotFoundException e) {
-            throw new TException(e.getMessage());
+        } catch (pr1Java.model.exceptions.NotFoundException e) {
+            throw new NotFoundException(e.getMessage());
         }
         signedInUsernames.remove(user.getUsername());
         Configuration.logger.trace("user {} signed out", user);
@@ -80,8 +79,8 @@ public class ThriftHandler implements ThriftServices.Iface {
         User user = null;
         try {
             user = userRepository.add(new User(username, password));
-        } catch (DuplicateException e) {
-            throw new TException(e.getMessage());
+        } catch (pr1Java.model.exceptions.DuplicateException e) {
+            throw new DuplicateException(e.getMessage());
         }
         Configuration.logger.trace("user {} registered", user);
         signInUser(username, password);
@@ -107,18 +106,18 @@ public class ThriftHandler implements ThriftServices.Iface {
         Configuration.logger.traceEntry("entering with {} {} {}", game, clientName, seatsCount);
 
         if (game.getAvailableSeats() < seatsCount)
-            throw new TException("not enough seats available");
+            throw new ParameterException("not enough seats available");
         try {
             gameRepository.setGameAvailableSeats(game.getGameId(), game.getAvailableSeats() - seatsCount);
-        } catch (NotFoundException e) {
-            throw new TException(e.getMessage());
+        } catch (pr1Java.model.exceptions.NotFoundException e) {
+            throw new NotFoundException(e.getMessage());
         }
         notifySeatsSold(game.getGameId(), seatsCount);
         Configuration.logger.trace("updated available seats {}", game.getAvailableSeats() - seatsCount);
         while (seatsCount != 0) {
             try {
                 ticketRepository.add(new Ticket(DtoUtils.toGame(game), clientName));
-            } catch (DuplicateException ignored) {
+            } catch (pr1Java.model.exceptions.DuplicateException ignored) {
             }
             seatsCount--;
         }

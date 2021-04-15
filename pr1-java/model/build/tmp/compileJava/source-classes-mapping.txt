@@ -1,24 +1,80 @@
-pr1Java/model/exceptions/ServerException.java
- pr1Java.model.exceptions.ServerException
-pr1Java/model/exceptions/NotFoundException.java
- pr1Java.model.exceptions.NotFoundException
-pr1Java/model/exceptions/DatabaseException.java
- pr1Java.model.exceptions.DatabaseException
-pr1Java/model/exceptions/SignInException.java
- pr1Java.model.exceptions.SignInException
-pr1Java/model/exceptions/NetworkingException.java
- pr1Java.model.exceptions.NetworkingException
-pr1Java/model/exceptions/DuplicateException.java
- pr1Java.model.exceptions.DuplicateException
-pr1Java/model/exceptions/ParameterException.java
- pr1Java.model.exceptions.ParameterException
 pr1Java/model/Game.java
  pr1Java.model.Game
+pr1Java/model/exceptions/thrift/DuplicateException.java
+ pr1Java.model.exceptions.thrift.DuplicateException
+ pr1Java.model.exceptions.thrift.DuplicateException$1
+ pr1Java.model.exceptions.thrift.DuplicateException$DuplicateExceptionStandardScheme
+ pr1Java.model.exceptions.thrift.DuplicateException$DuplicateExceptionStandardSchemeFactory
+ pr1Java.model.exceptions.thrift.DuplicateException$DuplicateExceptionTupleScheme
+ pr1Java.model.exceptions.thrift.DuplicateException$DuplicateExceptionTupleSchemeFactory
+ pr1Java.model.exceptions.thrift.DuplicateException$_Fields
+pr1Java/model/exceptions/SignInException.java
+ pr1Java.model.exceptions.SignInException
+pr1Java/model/exceptions/thrift/ParameterException.java
+ pr1Java.model.exceptions.thrift.ParameterException
+ pr1Java.model.exceptions.thrift.ParameterException$1
+ pr1Java.model.exceptions.thrift.ParameterException$ParameterExceptionStandardScheme
+ pr1Java.model.exceptions.thrift.ParameterException$ParameterExceptionStandardSchemeFactory
+ pr1Java.model.exceptions.thrift.ParameterException$ParameterExceptionTupleScheme
+ pr1Java.model.exceptions.thrift.ParameterException$ParameterExceptionTupleSchemeFactory
+ pr1Java.model.exceptions.thrift.ParameterException$_Fields
 pr1Java/model/Entity.java
  pr1Java.model.Entity
 pr1Java/model/User.java
  pr1Java.model.User
 pr1Java/model/observers/IObserver.java
  pr1Java.model.observers.IObserver
+pr1Java/model/exceptions/DatabaseException.java
+ pr1Java.model.exceptions.DatabaseException
 pr1Java/model/Ticket.java
  pr1Java.model.Ticket
+pr1Java/model/exceptions/ServerException.java
+ pr1Java.model.exceptions.ServerException
+pr1Java/model/exceptions/thrift/SignInException.java
+ pr1Java.model.exceptions.thrift.SignInException
+ pr1Java.model.exceptions.thrift.SignInException$1
+ pr1Java.model.exceptions.thrift.SignInException$SignInExceptionStandardScheme
+ pr1Java.model.exceptions.thrift.SignInException$SignInExceptionStandardSchemeFactory
+ pr1Java.model.exceptions.thrift.SignInException$SignInExceptionTupleScheme
+ pr1Java.model.exceptions.thrift.SignInException$SignInExceptionTupleSchemeFactory
+ pr1Java.model.exceptions.thrift.SignInException$_Fields
+pr1Java/model/exceptions/NotFoundException.java
+ pr1Java.model.exceptions.NotFoundException
+pr1Java/model/exceptions/thrift/NotFoundException.java
+ pr1Java.model.exceptions.thrift.NotFoundException
+ pr1Java.model.exceptions.thrift.NotFoundException$1
+ pr1Java.model.exceptions.thrift.NotFoundException$NotFoundExceptionStandardScheme
+ pr1Java.model.exceptions.thrift.NotFoundException$NotFoundExceptionStandardSchemeFactory
+ pr1Java.model.exceptions.thrift.NotFoundException$NotFoundExceptionTupleScheme
+ pr1Java.model.exceptions.thrift.NotFoundException$NotFoundExceptionTupleSchemeFactory
+ pr1Java.model.exceptions.thrift.NotFoundException$_Fields
+pr1Java/model/exceptions/NetworkingException.java
+ pr1Java.model.exceptions.NetworkingException
+pr1Java/model/exceptions/ParameterException.java
+ pr1Java.model.exceptions.ParameterException
+pr1Java/model/exceptions/thrift/NetworkingException.java
+ pr1Java.model.exceptions.thrift.NetworkingException
+ pr1Java.model.exceptions.thrift.NetworkingException$1
+ pr1Java.model.exceptions.thrift.NetworkingException$NetworkingExceptionStandardScheme
+ pr1Java.model.exceptions.thrift.NetworkingException$NetworkingExceptionStandardSchemeFactory
+ pr1Java.model.exceptions.thrift.NetworkingException$NetworkingExceptionTupleScheme
+ pr1Java.model.exceptions.thrift.NetworkingException$NetworkingExceptionTupleSchemeFactory
+ pr1Java.model.exceptions.thrift.NetworkingException$_Fields
+pr1Java/model/exceptions/DuplicateException.java
+ pr1Java.model.exceptions.DuplicateException
+pr1Java/model/exceptions/thrift/DatabaseException.java
+ pr1Java.model.exceptions.thrift.DatabaseException
+ pr1Java.model.exceptions.thrift.DatabaseException$1
+ pr1Java.model.exceptions.thrift.DatabaseException$DatabaseExceptionStandardScheme
+ pr1Java.model.exceptions.thrift.DatabaseException$DatabaseExceptionStandardSchemeFactory
+ pr1Java.model.exceptions.thrift.DatabaseException$DatabaseExceptionTupleScheme
+ pr1Java.model.exceptions.thrift.DatabaseException$DatabaseExceptionTupleSchemeFactory
+ pr1Java.model.exceptions.thrift.DatabaseException$_Fields
+pr1Java/model/exceptions/thrift/ServerException.java
+ pr1Java.model.exceptions.thrift.ServerException
+ pr1Java.model.exceptions.thrift.ServerException$1
+ pr1Java.model.exceptions.thrift.ServerException$ServerExceptionStandardScheme
+ pr1Java.model.exceptions.thrift.ServerException$ServerExceptionStandardSchemeFactory
+ pr1Java.model.exceptions.thrift.ServerException$ServerExceptionTupleScheme
+ pr1Java.model.exceptions.thrift.ServerException$ServerExceptionTupleSchemeFactory
+ pr1Java.model.exceptions.thrift.ServerException$_Fields

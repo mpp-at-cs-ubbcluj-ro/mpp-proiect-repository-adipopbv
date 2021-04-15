@@ -4,7 +4,6 @@ using Gtk;
 using Model;
 using Model.Exceptions;
 using Model.Observers;
-using Services;
 using Services.Reflection;
 
 namespace Client.Gtk.Reflection.Clients
@@ -27,7 +26,7 @@ namespace Client.Gtk.Reflection.Clients
             LoadGameTableData();
         }
 
-        public override Window Init(IReflectionServices services, User signedInUser)
+        public override Window Init(IServices services, User signedInUser)
         {
             base.Init(services, signedInUser);
             GuiElements.AddFromFile(ConfigurationManager.AppSettings["mainWindow"]);
