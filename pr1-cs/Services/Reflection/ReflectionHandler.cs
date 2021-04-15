@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Model;
@@ -6,16 +5,16 @@ using Model.Exceptions;
 using Model.Observers;
 using Persistence;
 
-namespace Services
+namespace Services.Reflection
 {
-    public class Services : IServices
+    public class ReflectionHandler : IReflectionServices
     {
         private readonly IGameRepository _gameRepository;
         private readonly IDictionary<string, IObserver> _signedInClients;
         private readonly ITicketRepository _ticketRepository;
         private readonly IUserRepository _userRepository;
 
-        public Services(IUserRepository userRepository, IGameRepository gameRepository,
+        public ReflectionHandler(IUserRepository userRepository, IGameRepository gameRepository,
             ITicketRepository ticketRepository)
         {
             _userRepository = userRepository;

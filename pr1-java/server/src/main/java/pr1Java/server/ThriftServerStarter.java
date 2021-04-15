@@ -39,7 +39,7 @@ public class ThriftServerStarter {
         Configuration.logger.trace("created {} instance", services);
 
         try {
-            TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(new TServerSocket(9090)).processor(new ThriftServices.Processor<>(services)));
+            TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(new TServerSocket(serverPort)).processor(new ThriftServices.Processor<>(services)));
             Configuration.logger.trace("created {} instance", server);
 
             server.serve();

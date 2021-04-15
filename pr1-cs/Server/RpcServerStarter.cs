@@ -5,6 +5,7 @@ using Persistence;
 using Persistence.Database;
 using Server.Servers;
 using Services;
+using Services.Reflection;
 
 namespace Server
 {
@@ -18,7 +19,7 @@ namespace Server
             IUserRepository userRepository = new UserDbRepository();
             IGameRepository gameRepository = new GameDbRepository();
             ITicketRepository ticketRepository = new TicketDbRepository();
-            IServices services = new Services.Services(userRepository, gameRepository, ticketRepository);
+            IReflectionServices services = new Services.Reflection.ReflectionHandler(userRepository, gameRepository, ticketRepository);
             
             Servers.Server server =
                 new RpcConcurrentServer(ConfigurationManager.AppSettings["serverHost"] ?? DefaultHost,

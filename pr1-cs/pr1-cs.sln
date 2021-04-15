@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networking", "Networking\Ne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{2102C1D5-3BC3-48A6-8A72-387943C7866C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thrift", "Thrift\Thrift.csproj", "{DD515BF0-FEEA-4D2B-B20D-F282A4E96518}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{2102C1D5-3BC3-48A6-8A72-387943C7866C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2102C1D5-3BC3-48A6-8A72-387943C7866C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2102C1D5-3BC3-48A6-8A72-387943C7866C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD515BF0-FEEA-4D2B-B20D-F282A4E96518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD515BF0-FEEA-4D2B-B20D-F282A4E96518}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD515BF0-FEEA-4D2B-B20D-F282A4E96518}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD515BF0-FEEA-4D2B-B20D-F282A4E96518}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

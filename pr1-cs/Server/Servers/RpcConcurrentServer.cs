@@ -2,14 +2,15 @@ using System.Net.Sockets;
 using System.Threading;
 using Networking;
 using Services;
+using Services.Reflection;
 
 namespace Server.Servers
 {
     public class RpcConcurrentServer : ConcurrentServer
     {
-        private readonly IServices _services;
+        private readonly IReflectionServices _services;
         
-        public RpcConcurrentServer(string host, int port, IServices services) : base(host, port)
+        public RpcConcurrentServer(string host, int port, IReflectionServices services) : base(host, port)
         {
             _services = services;
         }

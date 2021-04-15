@@ -1,19 +1,20 @@
 using Gtk;
 using Model;
 using Services;
+using Services.Reflection;
 
-namespace Client.Clients
+namespace Client.Gtk.Reflection.Clients
 {
-    public abstract class Client
+    public abstract class Window
     {
         protected readonly Builder GuiElements = new Builder();
-        protected IServices Services;
+        protected IReflectionServices Services;
         protected User SignedInUser;
-        protected Window OwnedWindow;
+        protected global::Gtk.Window OwnedWindow;
 
-        public virtual Client Init(IServices services, User signedInUser)
+        public virtual Window Init(IReflectionServices services, User signedInUser)
         {
-            GtkClientStarter.OpenWindows++;
+            ClientStarter.OpenWindows++;
             Services = services;
             SignedInUser = signedInUser;
 
@@ -27,8 +28,8 @@ namespace Client.Clients
 
         protected void Close()
         {
-            GtkClientStarter.OpenWindows--;
-            if (GtkClientStarter.OpenWindows <= 0)
+            ClientStarter.OpenWindows--;
+            if (ClientStarter.OpenWindows <= 0)
                 Application.Quit();
             OwnedWindow.Destroy();
         }

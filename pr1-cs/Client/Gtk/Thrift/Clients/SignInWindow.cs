@@ -1,36 +1,36 @@
 using System;
 using System.Configuration;
+using System.Threading.Tasks;
 using Gtk;
 using Model;
-using Services;
+using Services.Thrift;
+using Services.Thrift.DataTransfer;
+using Thrift.Transport;
 
-namespace Client.Clients
+namespace Client.Gtk.Thrift.Clients
 {
-    public class SignInClient : Client
+    public class SignInWindow : Window
     {
-        public override Client Init(IServices services, User signedInUser)
+        public override Window Init(TTransport connection, ThriftServices.Client services, User signedInUser)
         {
-            base.Init(services, signedInUser);
-            
+            base.Init(connection, services, signedInUser);
+
             GuiElements.AddFromFile(ConfigurationManager.AppSettings["signInWindow"]);
             GuiElements.Autoconnect(this);
-            OwnedWindow = (Window) GuiElements.GetObject("Window");
-            OwnedWindow.DeleteEvent += delegate
-            {
-                Close();
-            };
-            
+            OwnedWindow = (global::Gtk.Window) GuiElements.GetObject("Window");
+            OwnedWindow.DeleteEvent += delegate { Close(); };
+
             return this;
         }
 
-        public void SignIn(object sender, EventArgs args)
+        public async void SignIn(object sender, EventArgs args)
         {
             try
             {
                 var username = ((Entry) GuiElements.GetObject("UsernameEntry")).Text;
                 var password = ((Entry) GuiElements.GetObject("PasswordEntry")).Text;
-                var mainClient = new MainClient();
-                mainClient.Init(Services, Services.SignInUser(username, password, mainClient)).Open();
+                var mainClient = new MainWindow();
+                mainClient.Init(Connection, Services, DtoUtils.ToUser(await Services.signInUser(username, password))).Open();
                 Close();
             }
             catch (Exception exception)
@@ -45,7 +45,7 @@ namespace Client.Clients
 
         public void ToSignUp(object sender, EventArgs args)
         {
-            new SignUpClient().Init(Services, null).Open();
+            new SignUpWindow().Init(Connection, Services, null).Open();
             Close();
         }
     }

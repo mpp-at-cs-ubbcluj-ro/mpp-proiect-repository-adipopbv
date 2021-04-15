@@ -11,18 +11,19 @@ using Model.Observers;
 using Networking.DataTransfer;
 using Networking.RpcProtocol;
 using Services;
+using Services.Reflection;
 
 namespace Networking
 {
     public class RpcClientProxy : IObserver
     {
         private readonly TcpClient _connection;
-        private readonly IServices _services;
+        private readonly IReflectionServices _services;
         private volatile bool _connected;
         private IFormatter _formatter;
         private NetworkStream _stream;
 
-        public RpcClientProxy(IServices services, TcpClient connection)
+        public RpcClientProxy(IReflectionServices services, TcpClient connection)
         {
             _services = services;
             _connection = connection;

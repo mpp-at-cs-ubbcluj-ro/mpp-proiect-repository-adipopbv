@@ -1,15 +1,15 @@
 using System;
-using System.Collections.ObjectModel;
 using System.Configuration;
 using Gtk;
 using Model;
 using Model.Exceptions;
 using Model.Observers;
 using Services;
+using Services.Reflection;
 
-namespace Client.Clients
+namespace Client.Gtk.Reflection.Clients
 {
-    public class MainClient : Client, IObserver
+    public class MainWindow : Window, IObserver
     {
         private readonly ListStore _gamesModel = new(
             typeof(string),
@@ -19,17 +19,20 @@ namespace Client.Clients
             typeof(string),
             typeof(Game));
 
-        private Collection<Game> _games;
-
         private TreeView _gamesTreeView;
         private bool _switchFilter;
 
-        public override Client Init(IServices services, User signedInUser)
+        public void SeatsSold(int gameId, int seatsCount)
+        {
+            LoadGameTableData();
+        }
+
+        public override Window Init(IReflectionServices services, User signedInUser)
         {
             base.Init(services, signedInUser);
             GuiElements.AddFromFile(ConfigurationManager.AppSettings["mainWindow"]);
             GuiElements.Autoconnect(this);
-            OwnedWindow = (Window) GuiElements.GetObject("Window");
+            OwnedWindow = (global::Gtk.Window) GuiElements.GetObject("Window");
             OwnedWindow.DeleteEvent += delegate { Close(); };
 
             _gamesTreeView = (TreeView) GuiElements.GetObject("GamesTreeView");
@@ -115,18 +118,6 @@ namespace Client.Clients
                 dialog.Run();
                 dialog.Destroy();
             }
-        }
-
-        public void SeatsSold(int gameId, int seatsCount)
-        {
-            // foreach (var game in _games)
-                // if (game.Id == gameId)
-                // {
-                    // game.AvailableSeats -= seatsCount;
-                    // break;
-                // }
-            // _gamesModel.
-            LoadGameTableData();
         }
     }
 }

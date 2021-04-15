@@ -11,10 +11,11 @@ using Model.Observers;
 using Networking.DataTransfer;
 using Networking.RpcProtocol;
 using Services;
+using Services.Reflection;
 
 namespace Networking
 {
-    public class RpcServicesProxy : IServices
+    public class RpcServicesProxy : IReflectionServices
     {
         private readonly string _host;
         private readonly int _port;

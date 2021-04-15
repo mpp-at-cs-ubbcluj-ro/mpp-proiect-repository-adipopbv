@@ -2,9 +2,9 @@
 using Model;
 using Model.Observers;
 
-namespace Services
+namespace Services.Reflection
 {
-    public interface IServices
+    public interface IReflectionServices
     {
         User SignInUser(string username, string password, IObserver client);
 
