@@ -1,4 +1,4 @@
-package pr1Java.networking.rpcProtocol;
+package pr1Java.networking.reflection;
 
 import java.io.Serializable;
 

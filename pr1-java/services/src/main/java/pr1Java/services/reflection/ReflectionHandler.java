@@ -1,4 +1,4 @@
-package pr1Java.services;
+package pr1Java.services.reflection;
 
 import pr1Java.model.Game;
 import pr1Java.model.Ticket;
@@ -10,6 +10,7 @@ import pr1Java.model.observers.IObserver;
 import pr1Java.persistence.GameRepository;
 import pr1Java.persistence.TicketRepository;
 import pr1Java.persistence.UserRepository;
+import pr1Java.services.Configuration;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Services implements IServices {
+public class ReflectionHandler implements ReflectionServices {
 
     private final Integer defaultThreadsCount = 5;
     private final UserRepository userRepository;
@@ -26,7 +27,7 @@ public class Services implements IServices {
     private final TicketRepository ticketRepository;
     private final Map<String, IObserver> signedInClients;
 
-    public Services(UserRepository userRepository, GameRepository gameRepository, TicketRepository ticketRepository) {
+    public ReflectionHandler(UserRepository userRepository, GameRepository gameRepository, TicketRepository ticketRepository) {
         this.userRepository = userRepository;
         this.gameRepository = gameRepository;
         this.ticketRepository = ticketRepository;

@@ -1,18 +1,20 @@
 package pr1Java.server;
 
-import pr1Java.model.exceptions.ServerException;
+import org.apache.thrift.server.TServer;
+import org.apache.thrift.server.TThreadPoolServer;
+import org.apache.thrift.transport.TServerSocket;
+import org.apache.thrift.transport.TServerTransport;
+import org.apache.thrift.transport.TTransportException;
 import pr1Java.persistence.GameRepository;
 import pr1Java.persistence.TicketRepository;
 import pr1Java.persistence.UserRepository;
 import pr1Java.persistence.database.GameDbRepository;
 import pr1Java.persistence.database.TicketDbRepository;
 import pr1Java.persistence.database.UserDbRepository;
-import pr1Java.server.servers.RpcConcurrentServer;
-import pr1Java.server.servers.Server;
-import pr1Java.services.IServices;
-import pr1Java.services.Services;
+import pr1Java.services.thrift.ThriftHandler;
+import pr1Java.services.thrift.ThriftServices;
 
-public class RpcServerStarter {
+public class ThriftServerStarter {
 
     private static final int defaultPort = 55555;
 
@@ -33,21 +35,16 @@ public class RpcServerStarter {
         UserRepository userRepository = new UserDbRepository();
         GameRepository gameRepository = new GameDbRepository();
         TicketRepository ticketRepository = new TicketDbRepository();
-        IServices services = new Services(userRepository, gameRepository, ticketRepository);
+        ThriftServices.Iface services = new ThriftHandler(userRepository, gameRepository, ticketRepository);
         Configuration.logger.trace("created {} instance", services);
 
-        Server server = new RpcConcurrentServer(serverPort, services);
-        Configuration.logger.trace("created {} instance", server);
         try {
-            server.start();
-        } catch (ServerException exception) {
-            Configuration.logger.error("could not start the server", exception);
-        } finally {
-            try {
-                server.stop();
-            } catch (ServerException exception) {
-                Configuration.logger.error("could not stop the server", exception);
-            }
+            TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(new TServerSocket(9090)).processor(new ThriftServices.Processor<>(services)));
+            Configuration.logger.trace("created {} instance", server);
+
+            server.serve();
+        } catch (TTransportException e) {
+            Configuration.logger.error("could not start the server", e);
         }
 
         Configuration.logger.traceExit();

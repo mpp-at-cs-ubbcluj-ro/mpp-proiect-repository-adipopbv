@@ -1,12 +1,12 @@
-package pr1Java.networking.rpcProtocol;
+package pr1Java.networking.reflection;
 
 import pr1Java.model.Game;
 import pr1Java.model.User;
 import pr1Java.model.exceptions.NetworkingException;
 import pr1Java.model.observers.IObserver;
 import pr1Java.networking.Configuration;
-import pr1Java.networking.dataTransfer.*;
-import pr1Java.services.IServices;
+import pr1Java.networking.reflection.datatransfer.*;
+import pr1Java.services.reflection.ReflectionServices;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,15 +16,15 @@ import java.lang.reflect.Method;
 import java.net.Socket;
 import java.util.Collection;
 
-public class ClientRpcProxy implements Runnable, IObserver {
+public class ReflectionClientProxy implements Runnable, IObserver {
 
-    private final IServices services;
+    private final ReflectionServices services;
     private final Socket connection;
     private ObjectInputStream input;
     private ObjectOutputStream output;
     private volatile boolean connected;
 
-    public ClientRpcProxy(IServices services, Socket connection) {
+    public ReflectionClientProxy(ReflectionServices services, Socket connection) {
         this.services = services;
         this.connection = connection;
     }

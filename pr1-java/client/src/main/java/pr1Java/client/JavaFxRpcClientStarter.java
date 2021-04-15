@@ -6,8 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pr1Java.client.clients.SignInClient;
-import pr1Java.networking.rpcProtocol.ServicesRpcProxy;
-import pr1Java.services.IServices;
+import pr1Java.networking.reflection.ServicesRpcProxy;
+import pr1Java.services.reflection.ReflectionServices;
 
 public class JavaFxRpcClientStarter extends Application {
 
@@ -35,7 +35,7 @@ public class JavaFxRpcClientStarter extends Application {
         Configuration.logger.info("using server ip " + serverIp);
         Configuration.logger.info("using server port " + serverPort);
 
-        IServices services = new ServicesRpcProxy(serverIp, serverPort);
+        ReflectionServices services = new ServicesRpcProxy(serverIp, serverPort);
         Configuration.logger.trace("created {} instance", services);
 
         FXMLLoader loader = new FXMLLoader();

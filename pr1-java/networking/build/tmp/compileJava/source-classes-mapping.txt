@@ -1,31 +1,49 @@
-pr1Java/networking/rpcProtocol/RequestType.java
- pr1Java.networking.rpcProtocol.RequestType
-pr1Java/networking/rpcProtocol/ResponseType.java
- pr1Java.networking.rpcProtocol.ResponseType
-pr1Java/networking/dataTransfer/GameDto.java
- pr1Java.networking.dataTransfer.GameDto
-pr1Java/networking/dataTransfer/UserDto.java
- pr1Java.networking.dataTransfer.UserDto
-pr1Java/networking/dataTransfer/UsernameDto.java
- pr1Java.networking.dataTransfer.UsernameDto
-pr1Java/networking/rpcProtocol/Request.java
- pr1Java.networking.rpcProtocol.Request
- pr1Java.networking.rpcProtocol.Request$Builder
-pr1Java/networking/rpcProtocol/Response.java
- pr1Java.networking.rpcProtocol.Response
- pr1Java.networking.rpcProtocol.Response$Builder
-pr1Java/networking/dataTransfer/SeatsSoldDto.java
- pr1Java.networking.dataTransfer.SeatsSoldDto
+pr1Java/networking/thrift/datatransfer/UserDto.java
+ pr1Java.networking.thrift.datatransfer.UserDto
+ pr1Java.networking.thrift.datatransfer.UserDto$1
+ pr1Java.networking.thrift.datatransfer.UserDto$UserDtoStandardScheme
+ pr1Java.networking.thrift.datatransfer.UserDto$UserDtoStandardSchemeFactory
+ pr1Java.networking.thrift.datatransfer.UserDto$UserDtoTupleScheme
+ pr1Java.networking.thrift.datatransfer.UserDto$UserDtoTupleSchemeFactory
+ pr1Java.networking.thrift.datatransfer.UserDto$_Fields
+pr1Java/networking/reflection/datatransfer/DtoUtils.java
+ pr1Java.networking.reflection.datatransfer.DtoUtils
+pr1Java/networking/reflection/ResponseType.java
+ pr1Java.networking.reflection.ResponseType
+pr1Java/networking/thrift/datatransfer/GameDto.java
+ pr1Java.networking.thrift.datatransfer.GameDto
+ pr1Java.networking.thrift.datatransfer.GameDto$1
+ pr1Java.networking.thrift.datatransfer.GameDto$GameDtoStandardScheme
+ pr1Java.networking.thrift.datatransfer.GameDto$GameDtoStandardSchemeFactory
+ pr1Java.networking.thrift.datatransfer.GameDto$GameDtoTupleScheme
+ pr1Java.networking.thrift.datatransfer.GameDto$GameDtoTupleSchemeFactory
+ pr1Java.networking.thrift.datatransfer.GameDto$_Fields
+pr1Java/networking/reflection/datatransfer/UserDto.java
+ pr1Java.networking.reflection.datatransfer.UserDto
+pr1Java/networking/reflection/datatransfer/GameCollectionDto.java
+ pr1Java.networking.reflection.datatransfer.GameCollectionDto
+pr1Java/networking/reflection/RequestType.java
+ pr1Java.networking.reflection.RequestType
+pr1Java/networking/reflection/Request.java
+ pr1Java.networking.reflection.Request
+ pr1Java.networking.reflection.Request$Builder
+pr1Java/networking/reflection/Response.java
+ pr1Java.networking.reflection.Response
+ pr1Java.networking.reflection.Response$Builder
+pr1Java/networking/reflection/datatransfer/SeatsSellingDto.java
+ pr1Java.networking.reflection.datatransfer.SeatsSellingDto
 pr1Java/networking/Configuration.java
  pr1Java.networking.Configuration
-pr1Java/networking/dataTransfer/GameCollectionDto.java
- pr1Java.networking.dataTransfer.GameCollectionDto
-pr1Java/networking/dataTransfer/SeatsSellingDto.java
- pr1Java.networking.dataTransfer.SeatsSellingDto
-pr1Java/networking/rpcProtocol/ServicesRpcProxy.java
- pr1Java.networking.rpcProtocol.ServicesRpcProxy
- pr1Java.networking.rpcProtocol.ServicesRpcProxy$ReaderThread
-pr1Java/networking/dataTransfer/DtoUtils.java
- pr1Java.networking.dataTransfer.DtoUtils
-pr1Java/networking/rpcProtocol/ClientRpcProxy.java
- pr1Java.networking.rpcProtocol.ClientRpcProxy
+pr1Java/networking/reflection/datatransfer/SeatsSoldDto.java
+ pr1Java.networking.reflection.datatransfer.SeatsSoldDto
+pr1Java/networking/reflection/datatransfer/UsernameDto.java
+ pr1Java.networking.reflection.datatransfer.UsernameDto
+pr1Java/networking/reflection/ServicesRpcProxy.java
+ pr1Java.networking.reflection.ServicesRpcProxy
+ pr1Java.networking.reflection.ServicesRpcProxy$ReaderThread
+pr1Java/networking/thrift/datatransfer/DtoUtils.java
+ pr1Java.networking.thrift.datatransfer.DtoUtils
+pr1Java/networking/reflection/datatransfer/GameDto.java
+ pr1Java.networking.reflection.datatransfer.GameDto
+pr1Java/networking/reflection/ReflectionClientProxy.java
+ pr1Java.networking.reflection.ReflectionClientProxy

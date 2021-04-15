@@ -1,12 +1,12 @@
-package pr1Java.networking.rpcProtocol;
+package pr1Java.networking.reflection;
 
 import pr1Java.model.Game;
 import pr1Java.model.User;
 import pr1Java.model.exceptions.NetworkingException;
 import pr1Java.networking.Configuration;
-import pr1Java.networking.dataTransfer.*;
+import pr1Java.networking.reflection.datatransfer.*;
 import pr1Java.model.observers.IObserver;
-import pr1Java.services.IServices;
+import pr1Java.services.reflection.ReflectionServices;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -17,7 +17,7 @@ import java.net.Socket;
 import java.util.Collection;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class ServicesRpcProxy implements IServices {
+public class ServicesRpcProxy implements ReflectionServices {
 
     private final String host;
     private final Integer port;
@@ -249,7 +249,7 @@ public class ServicesRpcProxy implements IServices {
 
 //    private void handleUpdate(Response response) {
 //        if (response.getType() == ResponseType.SEATS_SOLD) {
-//            Game game = DtoUtils.toGame((GameDto) response.getData());
+//            Game game = DtoUtils.toGame((pr1Java.networking.thrift.dataTransfer.GameDto) response.getData());
 //            client.seatsSold(game);
 //        }
 //    }

@@ -12,7 +12,7 @@ import pr1Java.model.Game;
 import pr1Java.model.User;
 import pr1Java.model.exceptions.NotFoundException;
 import pr1Java.model.observers.IObserver;
-import pr1Java.services.IServices;
+import pr1Java.services.reflection.ReflectionServices;
 
 import java.util.Collection;
 
@@ -41,7 +41,7 @@ public class MainClient extends Client implements IObserver {
     Collection<Game> games;
 
     @Override
-    public void init(IServices services, User signedInUser) {
+    public void init(ReflectionServices services, User signedInUser) {
         Configuration.logger.traceEntry("entering init with {} and {}", services, signedInUser);
 
         super.init(services, signedInUser);

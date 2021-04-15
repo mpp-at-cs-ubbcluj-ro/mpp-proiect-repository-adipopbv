@@ -1,18 +1,18 @@
+pr1Java/persistence/Configuration.java
+ pr1Java.persistence.Configuration
+pr1Java/persistence/database/DbUtils.java
+ pr1Java.persistence.database.DbUtils
 pr1Java/persistence/GameRepository.java
  pr1Java.persistence.GameRepository
-pr1Java/persistence/database/GameDbRepository.java
- pr1Java.persistence.database.GameDbRepository
+pr1Java/persistence/database/UserDbRepository.java
+ pr1Java.persistence.database.UserDbRepository
 pr1Java/persistence/Repository.java
  pr1Java.persistence.Repository
 pr1Java/persistence/database/TicketDbRepository.java
  pr1Java.persistence.database.TicketDbRepository
-pr1Java/persistence/database/DbUtils.java
- pr1Java.persistence.database.DbUtils
 pr1Java/persistence/UserRepository.java
  pr1Java.persistence.UserRepository
 pr1Java/persistence/TicketRepository.java
  pr1Java.persistence.TicketRepository
-pr1Java/persistence/Configuration.java
- pr1Java.persistence.Configuration
-pr1Java/persistence/database/UserDbRepository.java
- pr1Java.persistence.database.UserDbRepository
+pr1Java/persistence/database/GameDbRepository.java
+ pr1Java.persistence.database.GameDbRepository

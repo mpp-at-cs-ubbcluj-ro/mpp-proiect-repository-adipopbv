@@ -1,4 +1,4 @@
-package pr1Java.networking.dataTransfer;
+package pr1Java.networking.reflection.datatransfer;
 
 import pr1Java.model.Game;
 import pr1Java.model.User;
