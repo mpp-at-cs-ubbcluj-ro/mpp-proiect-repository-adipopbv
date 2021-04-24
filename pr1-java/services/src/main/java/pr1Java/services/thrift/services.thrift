@@ -12,12 +12,17 @@ struct GameDto {
     6: i32 seatCost;
 }
 
+struct ConnectionInfo {
+    1: string ipAddress;
+    2: i32 port;
+}
+
 service ThriftServices {
-    UserDto signInUser(1: string username, 2: string password);
+    UserDto signInUser(1: string username, 2: string password, 3: ConnectionInfo connectionInfo);
 
     oneway void signOutUser(1: string username);
 
-    UserDto signUpUser(1: string username, 2: string password);
+    UserDto signUpUser(1: string username, 2: string password, 3: ConnectionInfo connectionInfo);
 
     list<GameDto> getAllGames();
 

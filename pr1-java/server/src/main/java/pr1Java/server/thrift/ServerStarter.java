@@ -1,10 +1,8 @@
 package pr1Java.server.thrift;
 
 import org.apache.thrift.server.TServer;
-import org.apache.thrift.server.TSimpleServer;
 import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.transport.TServerSocket;
-import org.apache.thrift.transport.TServerTransport;
 import org.apache.thrift.transport.TTransportException;
 import pr1Java.persistence.GameRepository;
 import pr1Java.persistence.TicketRepository;

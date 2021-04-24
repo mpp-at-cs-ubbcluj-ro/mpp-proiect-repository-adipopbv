@@ -5,12 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.apache.thrift.TConfiguration;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import pr1Java.client.Configuration;
-import pr1Java.client.javafx.thrift.clients.SignInWindow;
+import pr1Java.client.javafx.thrift.windows.SignInWindow;
 import pr1Java.services.thrift.ThriftServices;
 
 public class ClientStarter extends Application {

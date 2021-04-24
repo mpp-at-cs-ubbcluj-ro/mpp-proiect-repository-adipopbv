@@ -1,4 +1,4 @@
-package pr1Java.client.javafx.thrift.clients;
+package pr1Java.client.javafx.thrift.windows;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pr1Java.client.Configuration;
 import pr1Java.model.User;
+import pr1Java.services.thrift.datatransfer.ConnectionInfo;
 import pr1Java.services.thrift.datatransfer.DtoUtils;
 
 public class SignInWindow extends Window {
@@ -28,7 +29,7 @@ public class SignInWindow extends Window {
             Parent parent = loader.load();
             MainWindow controller = loader.getController();
 
-            User user = DtoUtils.toUser(services.signInUser(usernameField.getText(), passwordField.getText()));
+            User user = DtoUtils.toUser(services.signInUser(usernameField.getText(), passwordField.getText(), connectionInfo));
             Configuration.logger.trace("signed in {} ", user);
 
             controller.init(connection, services, user);

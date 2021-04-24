@@ -1,4 +1,4 @@
-package pr1Java.client.javafx.thrift.clients;
+package pr1Java.client.javafx.thrift.windows;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,17 +7,22 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.apache.thrift.server.TServer;
+import org.apache.thrift.server.TSimpleServer;
+import org.apache.thrift.server.TThreadPoolServer;
+import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TTransport;
+import org.apache.thrift.transport.TTransportException;
 import pr1Java.client.Configuration;
+import pr1Java.services.thrift.ThriftClient;
 import pr1Java.model.User;
 import pr1Java.model.exceptions.NotFoundException;
-import pr1Java.model.observers.IObserver;
 import pr1Java.services.thrift.ThriftServices;
 import pr1Java.services.thrift.datatransfer.GameDto;
 
 import java.util.Collection;
 
-public class MainWindow extends Window implements IObserver {
+public class MainWindow extends Window {
     @FXML
     public Text welcomeText;
     @FXML
@@ -46,6 +51,15 @@ public class MainWindow extends Window implements IObserver {
         Configuration.logger.traceEntry("entering init with {} and {}", services, signedInUser);
 
         super.init(connection, services, signedInUser);
+        ThriftClient.Iface client = new MainWindowHandler(this);
+        try {
+//            TServer server = new TSimpleServer(new TServer.Args(new TServerSocket(connectionInfo.port)).processor(new ThriftClient.Processor<>(client)));
+            TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(new TServerSocket(connectionInfo.port)).processor(new ThriftClient.Processor<>(client)));
+            new Thread(server::serve).start();
+        } catch (TTransportException e) {
+            e.printStackTrace();
+        }
+
         loadGameTableData();
 
         welcomeText.setText("Welcome " + signedInUser.getUsername() + "!");
@@ -142,21 +156,6 @@ public class MainWindow extends Window implements IObserver {
             Alert alert = new Alert(Alert.AlertType.ERROR, exception.getMessage());
             alert.show();
         }
-
-        Configuration.logger.traceExit();
-    }
-
-    @Override
-    public void seatsSold(Integer gameId, Integer seatsCount) {
-        Configuration.logger.traceEntry("entering with {} and {}", gameId, seatsCount);
-
-        for (GameDto searchedGame : games) {
-            if (searchedGame.getGameId() == gameId) {
-                searchedGame.setAvailableSeats(searchedGame.getAvailableSeats() - seatsCount);
-                break;
-            }
-        }
-        gameObservableList.setAll(games);
 
         Configuration.logger.traceExit();
     }

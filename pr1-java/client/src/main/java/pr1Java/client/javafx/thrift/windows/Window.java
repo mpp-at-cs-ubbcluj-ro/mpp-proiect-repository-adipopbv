@@ -1,14 +1,17 @@
-package pr1Java.client.javafx.thrift.clients;
+package pr1Java.client.javafx.thrift.windows;
 
 import org.apache.thrift.transport.TTransport;
 import pr1Java.client.Configuration;
 import pr1Java.model.User;
 import pr1Java.services.thrift.ThriftServices;
+import pr1Java.services.thrift.datatransfer.ConnectionInfo;
 
 public abstract class Window {
     protected TTransport connection;
     protected ThriftServices.Client services = null;
     protected User signedInUser = null;
+
+    protected ConnectionInfo connectionInfo = new ConnectionInfo("localhost", 1235);
 
     public void init(TTransport connection, ThriftServices.Client services, User signedInUser) {
         Configuration.logger.traceEntry("entering init with {} and {}", services, signedInUser);

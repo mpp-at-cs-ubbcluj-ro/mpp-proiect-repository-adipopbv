@@ -12,6 +12,34 @@ pr1Java/services/Configuration.java
  pr1Java.services.Configuration
 pr1Java/services/reflection/ReflectionHandler.java
  pr1Java.services.reflection.ReflectionHandler
+pr1Java/services/thrift/datatransfer/GameDto.java
+ pr1Java.services.thrift.datatransfer.GameDto
+ pr1Java.services.thrift.datatransfer.GameDto$1
+ pr1Java.services.thrift.datatransfer.GameDto$GameDtoStandardScheme
+ pr1Java.services.thrift.datatransfer.GameDto$GameDtoStandardSchemeFactory
+ pr1Java.services.thrift.datatransfer.GameDto$GameDtoTupleScheme
+ pr1Java.services.thrift.datatransfer.GameDto$GameDtoTupleSchemeFactory
+ pr1Java.services.thrift.datatransfer.GameDto$_Fields
+pr1Java/services/reflection/ReflectionServices.java
+ pr1Java.services.reflection.ReflectionServices
+pr1Java/services/thrift/datatransfer/ConnectionInfo.java
+ pr1Java.services.thrift.datatransfer.ConnectionInfo
+ pr1Java.services.thrift.datatransfer.ConnectionInfo$1
+ pr1Java.services.thrift.datatransfer.ConnectionInfo$ConnectionInfoStandardScheme
+ pr1Java.services.thrift.datatransfer.ConnectionInfo$ConnectionInfoStandardSchemeFactory
+ pr1Java.services.thrift.datatransfer.ConnectionInfo$ConnectionInfoTupleScheme
+ pr1Java.services.thrift.datatransfer.ConnectionInfo$ConnectionInfoTupleSchemeFactory
+ pr1Java.services.thrift.datatransfer.ConnectionInfo$_Fields
+pr1Java/services/thrift/gen-java/UserDto.java
+ UserDto
+ UserDto$1
+ UserDto$UserDtoStandardScheme
+ UserDto$UserDtoStandardSchemeFactory
+ UserDto$UserDtoTupleScheme
+ UserDto$UserDtoTupleSchemeFactory
+ UserDto$_Fields
+pr1Java/services/thrift/ThriftHandler.java
+ pr1Java.services.thrift.ThriftHandler
 pr1Java/services/thrift/ThriftServices.java
  pr1Java.services.thrift.ThriftServices
  pr1Java.services.thrift.ThriftServices$1
@@ -113,15 +141,38 @@ pr1Java/services/thrift/ThriftServices.java
  pr1Java.services.thrift.ThriftServices$signUpUser_result$signUpUser_resultStandardSchemeFactory
  pr1Java.services.thrift.ThriftServices$signUpUser_result$signUpUser_resultTupleScheme
  pr1Java.services.thrift.ThriftServices$signUpUser_result$signUpUser_resultTupleSchemeFactory
-pr1Java/services/reflection/ReflectionServices.java
- pr1Java.services.reflection.ReflectionServices
-pr1Java/services/thrift/datatransfer/GameDto.java
- pr1Java.services.thrift.datatransfer.GameDto
- pr1Java.services.thrift.datatransfer.GameDto$1
- pr1Java.services.thrift.datatransfer.GameDto$GameDtoStandardScheme
- pr1Java.services.thrift.datatransfer.GameDto$GameDtoStandardSchemeFactory
- pr1Java.services.thrift.datatransfer.GameDto$GameDtoTupleScheme
- pr1Java.services.thrift.datatransfer.GameDto$GameDtoTupleSchemeFactory
- pr1Java.services.thrift.datatransfer.GameDto$_Fields
-pr1Java/services/thrift/ThriftHandler.java
- pr1Java.services.thrift.ThriftHandler
+pr1Java/services/thrift/ThriftClient.java
+ pr1Java.services.thrift.ThriftClient
+ pr1Java.services.thrift.ThriftClient$1
+ pr1Java.services.thrift.ThriftClient$AsyncClient
+ pr1Java.services.thrift.ThriftClient$AsyncClient$Factory
+ pr1Java.services.thrift.ThriftClient$AsyncClient$seatsSold_call
+ pr1Java.services.thrift.ThriftClient$AsyncIface
+ pr1Java.services.thrift.ThriftClient$AsyncProcessor
+ pr1Java.services.thrift.ThriftClient$AsyncProcessor$seatsSold
+ pr1Java.services.thrift.ThriftClient$AsyncProcessor$seatsSold$1
+ pr1Java.services.thrift.ThriftClient$Client
+ pr1Java.services.thrift.ThriftClient$Client$Factory
+ pr1Java.services.thrift.ThriftClient$Iface
+ pr1Java.services.thrift.ThriftClient$Processor
+ pr1Java.services.thrift.ThriftClient$Processor$seatsSold
+ pr1Java.services.thrift.ThriftClient$seatsSold_args
+ pr1Java.services.thrift.ThriftClient$seatsSold_args$_Fields
+ pr1Java.services.thrift.ThriftClient$seatsSold_args$seatsSold_argsStandardScheme
+ pr1Java.services.thrift.ThriftClient$seatsSold_args$seatsSold_argsStandardSchemeFactory
+ pr1Java.services.thrift.ThriftClient$seatsSold_args$seatsSold_argsTupleScheme
+ pr1Java.services.thrift.ThriftClient$seatsSold_args$seatsSold_argsTupleSchemeFactory
+ pr1Java.services.thrift.ThriftClient$seatsSold_result
+ pr1Java.services.thrift.ThriftClient$seatsSold_result$_Fields
+ pr1Java.services.thrift.ThriftClient$seatsSold_result$seatsSold_resultStandardScheme
+ pr1Java.services.thrift.ThriftClient$seatsSold_result$seatsSold_resultStandardSchemeFactory
+ pr1Java.services.thrift.ThriftClient$seatsSold_result$seatsSold_resultTupleScheme
+ pr1Java.services.thrift.ThriftClient$seatsSold_result$seatsSold_resultTupleSchemeFactory
+pr1Java/services/thrift/gen-java/GameDto.java
+ GameDto
+ GameDto$1
+ GameDto$GameDtoStandardScheme
+ GameDto$GameDtoStandardSchemeFactory
+ GameDto$GameDtoTupleScheme
+ GameDto$GameDtoTupleSchemeFactory
+ GameDto$_Fields

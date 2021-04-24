@@ -1,4 +1,4 @@
-package pr1Java.client.javafx.thrift.clients;
+package pr1Java.client.javafx.thrift.windows;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +28,7 @@ public class SignUpWindow extends Window {
             Parent parent = loader.load();
             MainWindow controller = loader.getController();
 
-            User user = DtoUtils.toUser(services.signUpUser(usernameField.getText(), passwordField.getText()));
+            User user = DtoUtils.toUser(services.signUpUser(usernameField.getText(), passwordField.getText(), connectionInfo));
             Configuration.logger.trace("signed up {} ", user);
 
             controller.init(connection, services, user);
