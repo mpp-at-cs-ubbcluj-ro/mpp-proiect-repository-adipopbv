@@ -5,13 +5,13 @@
 
 <hibernate-mapping>
     <class name="pr1Java.model.Game" table="games">
-        <id name="id" column="gameId">
+        <id name="id" column="gameId" type="integer">
             <generator class="increment"/>
         </id>
-        <property name="name" column="name"/>
-        <property name="homeTeam" column="homeTeam"/>
-        <property name="awayTeam" column="awayTeam"/>
-        <property name="availableSeats" column="availableSeats"/>
-        <property name="seatCost" column="seatCost"/>
+        <property name="name" column="name" type="string"/>
+        <property name="homeTeam" column="homeTeam" type="string"/>
+        <property name="awayTeam" column="awayTeam" type="string"/>
+        <property name="availableSeats" column="availableSeats" type="integer"/>
+        <property name="seatCost" column="seatCost" type="integer"/>
     </class>
 </hibernate-mapping>

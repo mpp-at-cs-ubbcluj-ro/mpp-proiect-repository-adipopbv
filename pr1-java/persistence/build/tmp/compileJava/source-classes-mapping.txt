@@ -4,8 +4,8 @@ pr1Java/persistence/database/hibernate/HibernateRepository.java
  pr1Java.persistence.database.hibernate.HibernateRepository
 hibernate/dialect/identity/SQLiteDialectIdentityColumnSupport.java
  hibernate.dialect.identity.SQLiteDialectIdentityColumnSupport
-pr1Java/persistence/database/UserDbRepository.java
- pr1Java.persistence.database.UserDbRepository
+pr1Java/persistence/database/hibernate/TicketHibernateRepository.java
+ pr1Java.persistence.database.hibernate.TicketHibernateRepository
 hibernate/dialect/SQLiteDialect.java
  hibernate.dialect.SQLiteDialect
  hibernate.dialect.SQLiteDialect$1
@@ -31,5 +31,5 @@ pr1Java/persistence/TicketRepository.java
  pr1Java.persistence.TicketRepository
 pr1Java/persistence/database/hibernate/GameHibernateRepository.java
  pr1Java.persistence.database.hibernate.GameHibernateRepository
-pr1Java/persistence/database/hibernate/TicketHibernateRepository.java
- pr1Java.persistence.database.hibernate.TicketHibernateRepository
+pr1Java/persistence/database/UserDbRepository.java
+ pr1Java.persistence.database.UserDbRepository

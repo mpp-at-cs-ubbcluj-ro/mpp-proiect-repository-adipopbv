@@ -5,7 +5,7 @@
 
 <hibernate-mapping>
     <class name="pr1Java.model.User" table="users">
-        <id name="id" column="username"/>
-        <property name="password" column="password"/>
+        <id name="id" column="username" type="string"/>
+        <property name="password" column="password" type="string"/>
     </class>
 </hibernate-mapping>

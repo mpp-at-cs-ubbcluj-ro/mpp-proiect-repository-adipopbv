@@ -5,10 +5,10 @@
 
 <hibernate-mapping>
     <class name="pr1Java.model.Ticket" table="tickets">
-        <id name="id" column="ticketId">
+        <id name="id" column="ticketId" type="integer">
             <generator class="increment"/>
         </id>
         <many-to-one name="forGame" cascade="all" column="forGameId"/>
-        <property name="clientName" column="clientName"/>
+        <property name="clientName" column="clientName" type="string"/>
     </class>
 </hibernate-mapping>

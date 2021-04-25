@@ -5,7 +5,6 @@
 
 <hibernate-configuration>
     <session-factory>
-
         <property name="dialect">hibernate.dialect.SQLiteDialect</property>
         <property name="connection.driver_class">org.sqlite.JDBC</property>
         <property name="connection.url">jdbc:sqlite:/home/adipopbv/the-backpack/Work/University/Year 2/Semester 2/Medii de Proiectare si Programare/Laborator/proiect1-adipopbv/pr1-java/persistence/basketball-games.db</property>
