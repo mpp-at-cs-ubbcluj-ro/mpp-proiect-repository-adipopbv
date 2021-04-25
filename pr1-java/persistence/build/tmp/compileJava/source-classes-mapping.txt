@@ -29,3 +29,7 @@ pr1Java/persistence/UserRepository.java
  pr1Java.persistence.UserRepository
 pr1Java/persistence/TicketRepository.java
  pr1Java.persistence.TicketRepository
+pr1Java/persistence/database/hibernate/GameHibernateRepository.java
+ pr1Java.persistence.database.hibernate.GameHibernateRepository
+pr1Java/persistence/database/hibernate/TicketHibernateRepository.java
+ pr1Java.persistence.database.hibernate.TicketHibernateRepository
