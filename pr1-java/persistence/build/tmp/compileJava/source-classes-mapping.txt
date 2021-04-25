@@ -1,18 +1,35 @@
-pr1Java/persistence/Configuration.java
- pr1Java.persistence.Configuration
+hibernate/dialect/SQLiteDialect.java
+ hibernate.dialect.SQLiteDialect
+ hibernate.dialect.SQLiteDialect$1
+ hibernate.dialect.SQLiteDialect$2
+ hibernate.dialect.SQLiteDialect$3
+ hibernate.dialect.SQLiteDialect$4
+ hibernate.dialect.SQLiteDialect$SQLiteUniqueDelegate
 pr1Java/persistence/database/DbUtils.java
  pr1Java.persistence.database.DbUtils
-pr1Java/persistence/GameRepository.java
- pr1Java.persistence.GameRepository
-pr1Java/persistence/database/UserDbRepository.java
- pr1Java.persistence.database.UserDbRepository
+hibernate/dialect/identity/SQLiteDialectIdentityColumnSupport.java
+ hibernate.dialect.identity.SQLiteDialectIdentityColumnSupport
+pr1Java/persistence/Configuration.java
+ pr1Java.persistence.Configuration
 pr1Java/persistence/Repository.java
  pr1Java.persistence.Repository
+pr1Java/persistence/database/hibernate/HibernateRepository.java
+ pr1Java.persistence.database.hibernate.HibernateRepository
+pr1Java/persistence/TicketRepository.java
+ pr1Java.persistence.TicketRepository
+pr1Java/persistence/GameRepository.java
+ pr1Java.persistence.GameRepository
+pr1Java/persistence/database/GameDbRepository.java
+ pr1Java.persistence.database.GameDbRepository
+pr1Java/persistence/database/UserDbRepository.java
+ pr1Java.persistence.database.UserDbRepository
 pr1Java/persistence/database/TicketDbRepository.java
  pr1Java.persistence.database.TicketDbRepository
 pr1Java/persistence/UserRepository.java
  pr1Java.persistence.UserRepository
-pr1Java/persistence/TicketRepository.java
- pr1Java.persistence.TicketRepository
-pr1Java/persistence/database/GameDbRepository.java
- pr1Java.persistence.database.GameDbRepository
+pr1Java/persistence/database/hibernate/UserHibernateRepository.java
+ pr1Java.persistence.database.hibernate.UserHibernateRepository
+pr1Java/persistence/database/hibernate/TicketHibernateRepository.java
+ pr1Java.persistence.database.hibernate.TicketHibernateRepository
+pr1Java/persistence/database/hibernate/GameHibernateRepository.java
+ pr1Java.persistence.database.hibernate.GameHibernateRepository

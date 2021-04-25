@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="dialect">hibernate.dialect.SQLiteDialect</property>
+        <property name="connection.driver_class">org.sqlite.JDBC</property>
+        <property name="connection.url">jdbc:sqlite:/home/adipopbv/the-backpack/Work/University/Year 2/Semester 2/Medii de Proiectare si Programare/Laborator/proiect1-adipopbv/pr1-java/persistence/basketball-games.db</property>
+
+<!--        <property name="hibernate.hbm2ddl.auto">update</property>-->
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <mapping resource="hibernate/model/User.hbm.xml"/>
+        <mapping resource="hibernate/model/Game.hbm.xml"/>
+        <mapping resource="hibernate/model/Ticket.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

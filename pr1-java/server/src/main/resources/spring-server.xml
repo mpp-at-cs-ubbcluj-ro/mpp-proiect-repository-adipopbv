@@ -3,9 +3,9 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="userRepository" class="pr1Java.persistence.database.UserDbRepository"/>
-    <bean id="gameRepository" class="pr1Java.persistence.database.GameDbRepository"/>
-    <bean id="ticketRepository" class="pr1Java.persistence.database.TicketDbRepository"/>
+    <bean id="userRepository" class="pr1Java.persistence.database.hibernate.UserHibernateRepository"/>
+    <bean id="gameRepository" class="pr1Java.persistence.database.hibernate.GameHibernateRepository"/>
+    <bean id="ticketRepository" class="pr1Java.persistence.database.hibernate.TicketHibernateRepository"/>
 
     <bean id="services" class="pr1Java.services.Services">
         <constructor-arg ref="userRepository"/>
