@@ -7,6 +7,10 @@ public class Game extends Entity<Integer> {
     private Integer availableSeats;
     private Integer seatCost;
 
+    public Game() {
+
+    }
+
     public Game(Integer id, String name, String homeTeam, String awayTeam, Integer availableSeats, Integer seatCost) {
         super(id);
         this.name = name;

@@ -48,7 +48,7 @@ public class TicketHibernateRepository extends HibernateRepository implements Ti
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
-                Ticket ticket = session.createQuery("select t from Ticket t where t.id = " + id, Ticket.class).getSingleResult();
+                Ticket ticket = session.createQuery("from Ticket where id like " + id, Ticket.class).getSingleResult();
                 transaction.commit();
                 Configuration.logger.trace("Gotten instance");
 

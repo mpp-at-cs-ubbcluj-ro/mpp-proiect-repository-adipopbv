@@ -4,6 +4,10 @@ public class Ticket extends Entity<Integer> {
     private Game forGame;
     private String clientName;
 
+    public Ticket() {
+
+    }
+
     public Ticket(Game forGame, String clientName) {
         this.forGame = forGame;
         this.clientName = clientName;

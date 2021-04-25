@@ -15,9 +15,6 @@ public abstract class HibernateRepository {
         } catch (Exception e) {
             System.err.println("Error initializing session factory " + e);
             e.printStackTrace();
-        } finally {
-            if (sessionFactory != null)
-                sessionFactory.close();
         }
     }
 

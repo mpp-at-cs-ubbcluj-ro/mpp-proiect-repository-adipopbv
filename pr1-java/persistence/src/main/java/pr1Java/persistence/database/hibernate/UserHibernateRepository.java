@@ -49,7 +49,7 @@ public class UserHibernateRepository extends HibernateRepository implements User
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
-                User user = session.createQuery("select u from User u where u.id = " + username + ";", User.class).getSingleResult();
+                User user = session.createQuery("from User where id like '" + username + "'", User.class).getSingleResult();
                 transaction.commit();
                 Configuration.logger.trace("Gotten instance");
 

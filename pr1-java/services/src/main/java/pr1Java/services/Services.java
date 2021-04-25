@@ -94,6 +94,7 @@ public class Services implements IServices {
         if (game.getAvailableSeats() < seatsCount)
             throw new ParameterException("not enough seats available");
         gameRepository.setGameAvailableSeats(game.getId(), game.getAvailableSeats() - seatsCount);
+        game.setAvailableSeats(game.getAvailableSeats() - seatsCount);
         notifySeatsSold(game.getId(), seatsCount);
         Configuration.logger.trace("updated available seats {}", game.getAvailableSeats() - seatsCount);
         while (seatsCount != 0) {

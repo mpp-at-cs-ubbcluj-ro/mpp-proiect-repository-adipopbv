@@ -48,7 +48,7 @@ public class GameHibernateRepository extends HibernateRepository implements Game
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
-                Game game = session.createQuery("select g from Game g where g.id = " + id + ";", Game.class).getSingleResult();
+                Game game = session.createQuery("from Game where id like " + id, Game.class).getSingleResult();
                 transaction.commit();
                 Configuration.logger.trace("Gotten instance");
 
