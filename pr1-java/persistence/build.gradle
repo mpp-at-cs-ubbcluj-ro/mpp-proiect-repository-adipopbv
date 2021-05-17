@@ -18,5 +18,7 @@ dependencies {
     runtimeOnly group: 'org.xerial', name: 'sqlite-jdbc', version: '3.16.1'
     implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.30.Final'
 
+    implementation 'org.springframework:spring-context:5.0.4.RELEASE'
+
     implementation project (':model')
 }

@@ -2,6 +2,7 @@ package pr1Java.persistence.database.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
 import pr1Java.model.Game;
 import pr1Java.model.exceptions.DuplicateException;
 import pr1Java.model.exceptions.NotFoundException;
@@ -11,6 +12,7 @@ import pr1Java.persistence.GameRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class GameHibernateRepository extends HibernateRepository implements GameRepository {
     public GameHibernateRepository() {
         Configuration.loadProperties("./persistence/persistence.config");
