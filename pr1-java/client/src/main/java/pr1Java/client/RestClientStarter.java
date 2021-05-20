@@ -28,24 +28,11 @@ public class RestClientStarter {
                 1
         );
         try {
-//            show(() -> {
-//                Iterable<Game> res = client.getAll();
-//                for (Game game : res) {
-//                    System.out.println(game);
-//                }
-//            });
-//            show(() -> System.out.println(client.getOne(4)));
             show(() -> System.out.println(client.create(game1)));
             show(() -> System.out.println(client.getOne(4)));
             show(() -> client.update(4, game2));
             show(() -> System.out.println(client.getOne(4)));
             show(() -> client.delete(4));
-//            show(() -> {
-//                Iterable<Game> res = client.getAll();
-//                for (Game game : res) {
-//                    System.out.println(game);
-//                }
-//            });
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -66,10 +53,6 @@ public class RestClientStarter {
             System.out.println("Error: " + e);
         }
         return null;
-    }
-
-    public Iterable<Game> getAll() {
-        return execute(() -> restTemplate.getForObject(url, Iterable.class));
     }
 
     public Game getOne(int id) {

@@ -28,7 +28,7 @@ namespace Client
         private async Task<Game> GetGameAsync(string path)
         {
             Game game = null;
-            HttpResponseMessage response = await _client.GetAsync(path);
+            var response = await _client.GetAsync(path);
             if (response.IsSuccessStatusCode) game = await response.Content.ReadAsAsync<Game>();
             return game;
         }
