@@ -4,7 +4,7 @@
     {
         public static void Main(string[] args)
         {
-            new GtkClientStarter().Run(args);
+            new RestClientStarter().Run(args);
         }
     }
 }

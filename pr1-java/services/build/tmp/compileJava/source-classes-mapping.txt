@@ -4,3 +4,5 @@ pr1Java/services/IServices.java
  pr1Java.services.IServices
 pr1Java/services/Services.java
  pr1Java.services.Services
+pr1Java/services/rest/GameController.java
+ pr1Java.services.rest.GameController

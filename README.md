@@ -31,7 +31,7 @@ Lista saptamanilor (temele facute se taie cu o linie orizontala):
 - ~~saptamana 8~~
 - ~~saptamana 9~~
 - ~~saptamana 10~~
-- saptamana 11
+- ~~saptamana 11~~
 - saptamana 12
 - saptamana 13
 - saptamana 14
