@@ -49,6 +49,7 @@ class GameForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
+            {/*<form>*/}
                 <label>
                     Id:
                     <input type="text" value={this.state.id} onChange={this.handleGameChange}/>
@@ -74,9 +75,35 @@ class GameForm extends React.Component {
                     <input type="number" value={this.state.seatCost} onChange={this.handleSeatCostChange}/>
                 </label><br/>
 
-                <input type="submit" value="Submit"/>
+                <input type="submit" value="Add"/>
+                {/*<button onClick={() => this.handleAdd(this.props.addFunc, this.state)}>Add</button>*/}
+                {/*<button onClick={() => this.handleModify(this.props.modifyFunc ,this.state)}>Modify</button>*/}
             </form>
         );
+    }
+
+    handleModify(modifyFunc, state) {
+        let game = {
+            id: state.id,
+            name: state.name,
+            homeTeam: state.homeTeam,
+            awayTeam: state.awayTeam,
+            availableSeats: state.availableSeats,
+            seatCost: state.seatCost
+        }
+        modifyFunc(state.id, game);
+    }
+
+    handleAdd(addFunc, state) {
+        let game = {
+            id: state.id,
+            name: state.name,
+            homeTeam: state.homeTeam,
+            awayTeam: state.awayTeam,
+            availableSeats: state.availableSeats,
+            seatCost: state.seatCost
+        }
+        addFunc(game);
     }
 }
 

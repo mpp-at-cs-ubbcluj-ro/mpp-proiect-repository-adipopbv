@@ -11,6 +11,7 @@ import pr1Java.persistence.GameRepository;
 
 @RestController
 @RequestMapping("/basketball-games/games")
+@CrossOrigin(origins = "http://localhost:3000", methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowedHeaders = "*", allowCredentials = "true")
 public class GameController {
     @Autowired
     private GameRepository gameRepository;

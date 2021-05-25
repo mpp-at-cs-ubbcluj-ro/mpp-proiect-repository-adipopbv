@@ -12,6 +12,10 @@ class GameRow extends React.Component {
             <tr>
                 <td>{this.props.game.id}</td>
                 <td>{this.props.game.name}</td>
+                <td>{this.props.game.homeTeam}</td>
+                <td>{this.props.game.awayTeam}</td>
+                <td>{this.props.game.availableSeats}</td>
+                <td>{this.props.game.seatCost}</td>
                 <td>
                     <button onClick={this.handleClick}>Delete</button>
                 </td>
@@ -24,7 +28,7 @@ class GameTable extends React.Component {
     render() {
         let rows = [];
         let deleteFunc = this.props.deleteFunc;
-        this.props.games.forEach(function (game) {
+        Array.prototype.forEach.call(this.props.games, game => {
             rows.push(<GameRow game={game} key={game.id} deleteFunc={deleteFunc}/>);
         });
         return (

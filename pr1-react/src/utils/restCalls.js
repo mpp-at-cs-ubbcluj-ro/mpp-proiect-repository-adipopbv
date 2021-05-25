@@ -55,7 +55,7 @@ export function deleteGame(id) {
         });
 }
 
-export function addGame(user) {
+export function addGame(game) {
     let header = new Headers();
     header.append("Accept", "application/json");
     header.append("Content-Type", "application/json");
@@ -64,10 +64,32 @@ export function addGame(user) {
         method: 'POST',
         headers: header,
         mode: 'cors',
-        body: JSON.stringify(user)
+        body: JSON.stringify(game)
     };
 
     return fetch(BASE_URL, init)
+        .then(status)
+        .then(response => {
+            return response.text();
+        }).catch(error => {
+            console.log('Request failed', error);
+            return Promise.reject(error);
+        });
+}
+
+export function modifyGame(id, game) {
+    let header = new Headers();
+    header.append("Accept", "application/json");
+    header.append("Content-Type", "application/json");
+
+    let init = {
+        method: 'PUT',
+        headers: header,
+        mode: 'cors',
+        body: JSON.stringify(game)
+    };
+
+    return fetch(BASE_URL + '/' + id, init)
         .then(status)
         .then(response => {
             return response.text();
