@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userRepository" class="pr1Java.persistence.database.hibernate.UserHibernateRepository"/>
+    <bean id="gameRepository" class="pr1Java.persistence.database.hibernate.GameHibernateRepository"/>
+    <bean id="ticketRepository" class="pr1Java.persistence.database.hibernate.TicketHibernateRepository"/>
+
+    <bean id="services" class="pr1Java.services.Services">
+        <constructor-arg ref="userRepository"/>
+        <constructor-arg ref="gameRepository"/>
+        <constructor-arg ref="ticketRepository"/>
+    </bean>
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="pr1Java"/>
+        <property name="service" ref="services"/>
+        <property name="serviceInterface" value="pr1Java.services.IServices"/>
+        <property name="servicePort" value="1099"/>
+    </bean>
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="pr1Java.model.Game" table="games">
+        <id name="id" column="gameId" type="integer">
+            <generator class="increment"/>
+        </id>
+        <property name="name" column="name" type="string"/>
+        <property name="homeTeam" column="homeTeam" type="string"/>
+        <property name="awayTeam" column="awayTeam" type="string"/>
+        <property name="availableSeats" column="availableSeats" type="integer"/>
+        <property name="seatCost" column="seatCost" type="integer"/>
+    </class>
+</hibernate-mapping>

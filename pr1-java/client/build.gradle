@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+}
+
+group 'pr1-java'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+mainClassName = 'pr1Java.client.ClientMain'
+
+dependencies {
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.0'
+
+    implementation 'org.springframework:spring-context:5.0.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation platform('org.springframework.boot:spring-boot-dependencies:2.2.1.RELEASE')
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version:'2.9.5'
+
+    implementation project(':model')
+    implementation project(':services')
+}
+
+javafx {
+    version = "15.0.1"
+    modules = ['javafx.controls', 'javafx.fxml']
+}
